@@ -10,8 +10,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({ error: "OPENAI_API_KEY is not configured" });
+    if (!process.env.GROQ_API_KEY) {
+      return res.status(500).json({ error: "GROQ_API_KEY is not configured" });
     }
 
     const input = [
@@ -34,27 +34,36 @@ export default async function handler(req, res) {
       { role: "user", content: message.trim() }
     ];
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({ model: "gpt-5.6-luna", input })
-    });
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-oss-20b",
+          input
+        })
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
       return res.status(response.status).json({
-        error: data?.error?.message || "OpenAI request failed"
+        error: data?.error?.message || "Groq request failed"
       });
     }
 
-    const reply = typeof data.output_text === "string" ? data.output_text : "";
+    const reply =
+      typeof data.output_text === "string" ? data.output_text : "";
 
     if (!reply) {
-      return res.status(502).json({ error: "The AI returned an empty response" });
+      return res.status(502).json({
+        error: "The AI returned an empty response"
+      });
     }
 
     return res.status(200).json({ reply });
