@@ -34,8 +34,13 @@ export default async function handler(req, res) {
       { role: "user", content: message.trim() }
     ];
 
+    const messages = input.map((item) => ({
+      role: item.role === "developer" ? "system" : item.role,
+      content: item.content
+    }));
+
     const response = await fetch(
-      "https://api.groq.com/openai/v1/responses",
+      "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
@@ -44,7 +49,7 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           model: "openai/gpt-oss-20b",
-          input
+          messages
         })
       }
     );
@@ -58,7 +63,9 @@ export default async function handler(req, res) {
     }
 
     const reply =
-      typeof data.output_text === "string" ? data.output_text : "";
+      typeof data?.choices?.[0]?.message?.content === "string"
+        ? data.choices[0].message.content
+        : "";
 
     if (!reply) {
       return res.status(502).json({
