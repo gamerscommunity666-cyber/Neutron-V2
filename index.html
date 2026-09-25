@@ -173,26 +173,75 @@ h1{overflow-wrap:anywhere;word-break:normal}
 </div>
 
 <script>
+const conversation = [];
+
 function starter(text){
   document.getElementById('prompt').value=text;
   document.getElementById('prompt').focus();
 }
-function sendMessage(e){
+
+async function sendMessage(e){
   e.preventDefault();
-  const input=document.getElementById('prompt');
-  const text=input.value.trim();
-  if(!text)return;
-  const chat=document.getElementById('chat');
-  chat.style.display='block';
+
+  const input = document.getElementById('prompt');
+  const text = input.value.trim();
+  if(!text) return;
+
+  const chat = document.getElementById('chat');
+  chat.style.display = 'block';
+
   chat.innerHTML += `<div class="message user">${escapeHtml(text)}</div>`;
-  input.value='';
-  setTimeout(()=>{
-    chat.innerHTML += `<div class="message bot"><b>Neutron</b><br>This is the V2 interface. The real AI backend can be connected next.</div>`;
-    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-  },300);
+  input.value = '';
+
+  conversation.push({ role: 'user', content: text });
+
+  const loadingId = 'neutron-loading-' + Date.now();
+  chat.innerHTML += `<div class="message bot" id="${loadingId}"><b>Neutron</b><br>Thinking…</div>`;
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        history: conversation.slice(-20)
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || 'Neutron could not respond.');
+    }
+
+    const reply = typeof data.reply === 'string' ? data.reply : 'Neutron returned an empty response.';
+    conversation.push({ role: 'assistant', content: reply });
+
+    const loading = document.getElementById(loadingId);
+    if(loading){
+      loading.innerHTML = `<b>Neutron</b><br>${escapeHtml(reply).replace(/
+/g, '<br>')}`;
+    }
+  } catch(error) {
+    const loading = document.getElementById(loadingId);
+    const message = error && error.message ? error.message : 'Something went wrong.';
+    if(loading){
+      loading.innerHTML = `<b>Neutron</b><br>Sorry, I couldn't connect right now.<br><small>${escapeHtml(message)}</small>`;
+    }
+  }
+
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
 }
+
 function escapeHtml(s){
-  return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  return String(s).replace(/[&<>"']/g,m=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[m]));
 }
 </script>
 </body>
