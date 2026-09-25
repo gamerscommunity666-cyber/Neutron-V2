@@ -220,8 +220,7 @@ async function sendMessage(e){
 
     const loading = document.getElementById(loadingId);
     if(loading){
-      loading.innerHTML = `<b>Neutron</b><br>${escapeHtml(reply).replace(/
-/g, '<br>')}`;
+      loading.innerHTML = `<b>Neutron</b><br>${escapeHtml(reply).replace(/\n/g, "<br>")}`;
     }
   } catch(error) {
     const loading = document.getElementById(loadingId);
