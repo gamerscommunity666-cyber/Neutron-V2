@@ -378,6 +378,7 @@ h1 span{
     0 0 35px rgba(123,49,225,.12);
 
   position:relative;
+  overflow:visible;
 }
 
 .input{
@@ -758,22 +759,25 @@ h1 span{
 
   .card h2{
     font-size:19px;
+    line-height:1.2;
   }
 
   .card p{
     font-size:14px;
+    line-height:1.4;
   }
 
   .features{
     grid-template-columns:1fr;
     gap:10px;
-    margin:20px 4px 25px;
+    margin-left:2px;
+    margin-right:2px;
     font-size:13px;
   }
 
   .composer{
+    padding:16px 14px 12px;
     border-radius:22px;
-    padding:15px 14px 10px;
   }
 
   .input{
@@ -782,63 +786,35 @@ h1 span{
   }
 
   .controls{
-    gap:8px;
+    gap:10px;
   }
 
   .controls button{
-    font-size:13px;
+    font-size:14px;
   }
 
   .send{
-    width:48px;
-    height:48px;
-    border-radius:15px;
-    font-size:23px;
+    width:50px;
+    height:50px;
+    flex:none;
   }
 
   .tools-menu{
-    left:8px;
-    bottom:72px;
+    left:12px;
+    bottom:76px;
     width:210px;
   }
 
   .message{
-    max-width:94%;
-    font-size:14px;
-  }
-
-  .sidebar{
-    width:290px;
+    max-width:92%;
   }
 
 }
 
-/* =========================
-   EXTRA SMALL
-========================= */
+/* Prevent weird horizontal overflow */
 
-@media(max-width:380px){
-
-  .brand-name{
-    font-size:23px;
-  }
-
-  .badge{
-    display:none;
-  }
-
-  .hero{
-    padding:18px 14px;
-  }
-
-  h1{
-    font-size:34px;
-  }
-
-  .tool-button{
-    padding:6px;
-  }
-
+*{
+  max-width:100%;
 }
 
 </style>
@@ -847,15 +823,14 @@ h1 span{
 
 <body>
 
-<!-- SIDEBAR OVERLAY -->
+<!-- =========================
+     SIDEBAR
+========================= -->
 
 <div
   class="sidebar-overlay"
   id="sidebarOverlay"
 ></div>
-
-
-<!-- SIDEBAR -->
 
 <aside
   class="sidebar"
@@ -871,62 +846,57 @@ h1 span{
     <button
       class="sidebar-close"
       id="sidebarClose"
-      type="button"
+      aria-label="Close sidebar"
     >
       ×
     </button>
 
   </div>
 
-
   <button
     class="new-chat"
     id="newChatBtn"
-    type="button"
   >
-    ＋ New Chat
+    ＋ &nbsp; New Chat
   </button>
 
-
   <div class="sidebar-section">
-    Chat History
+    Conversations
   </div>
-
 
   <div
     class="history-list"
     id="historyList"
   ></div>
 
-
   <div class="sidebar-bottom">
     Neutron V2<br>
-    Your personal intelligence workspace
+    Your personal intelligence.
   </div>
 
 </aside>
 
 
-<div class="app">
+<!-- =========================
+     MAIN APP
+========================= -->
 
-  <!-- HEADER -->
+<div class="app">
 
   <header>
 
     <button
       class="icon-btn"
       id="menuBtn"
-      type="button"
       aria-label="Open menu"
     >
       ☰
     </button>
 
-
     <div class="brand">
 
       <div class="atom">
-        ✦
+        ⚛
       </div>
 
       <div class="brand-name">
@@ -939,6 +909,14 @@ h1 span{
 
     </div>
 
+    <button
+      class="icon-btn"
+      id="installBtn"
+      aria-label="Install Neutron"
+    >
+      ⇩
+    </button>
+
   </header>
 
 
@@ -949,7 +927,7 @@ h1 span{
     <div class="hero-top">
 
       <div class="spark">
-        ⚛
+        ✦
       </div>
 
       <div>
@@ -1141,15 +1119,6 @@ h1 span{
 
       <button
         class="tool-item"
-        id="webSearchTool"
-        type="button"
-      >
-        <span>🌐</span>
-        Web Search
-      </button>
-
-      <button
-        class="tool-item"
         id="calculatorTool"
         type="button"
       >
@@ -1173,6 +1142,15 @@ h1 span{
       >
         <span>✦</span>
         Focus input
+      </button>
+
+      <button
+        class="tool-item"
+        id="webSearchTool"
+        type="button"
+      >
+        <span>🌐</span>
+        Web Search
       </button>
 
     </div>
@@ -1279,9 +1257,6 @@ const toolsBtn =
 const toolsMenu =
   document.getElementById('toolsMenu');
 
-const webSearchTool =
-  document.getElementById('webSearchTool');
-
 const calculatorTool =
   document.getElementById('calculatorTool');
 
@@ -1291,11 +1266,17 @@ const clearChatTool =
 const focusTool =
   document.getElementById('focusTool');
 
+const webSearchTool =
+  document.getElementById('webSearchTool');
+
 const plusBtn =
   document.getElementById('plusBtn');
 
 const micBtn =
   document.getElementById('micBtn');
+
+const installBtn =
+  document.getElementById('installBtn');
 
 
 /* =====================================================
@@ -1356,4 +1337,1161 @@ try{
 }
 
 
-/*
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveConversation(){
+
+  try{
+
+    localStorage.setItem(
+      'neutron_current_conversation',
+      JSON.stringify(conversation)
+    );
+
+  }catch(error){
+
+    console.log(
+      'Could not save conversation.'
+    );
+
+  }
+
+}
+
+
+function saveHistory(){
+
+  try{
+
+    localStorage.setItem(
+      'neutron_chat_history',
+      JSON.stringify(chatHistory)
+    );
+
+  }catch(error){
+
+    console.log(
+      'Could not save chat history.'
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   STARTER BUTTONS
+===================================================== */
+
+function starter(text){
+
+  input.value = text;
+
+  input.focus();
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function openSidebar(){
+
+  sidebar.classList.add('open');
+
+  sidebarOverlay.classList.add('open');
+
+  renderHistory();
+
+}
+
+
+function closeSidebar(){
+
+  sidebar.classList.remove('open');
+
+  sidebarOverlay.classList.remove('open');
+
+}
+
+
+menuBtn.addEventListener(
+  'click',
+  openSidebar
+);
+
+
+sidebarClose.addEventListener(
+  'click',
+  closeSidebar
+);
+
+
+sidebarOverlay.addEventListener(
+  'click',
+  closeSidebar
+);
+
+
+/* =====================================================
+   NEW CHAT
+===================================================== */
+
+newChatBtn.addEventListener(
+  'click',
+  () => {
+
+    conversation = [];
+
+    currentChatId =
+      'chat-' + Date.now();
+
+    chat.innerHTML = '';
+
+    chat.style.display = 'none';
+
+    input.value = '';
+
+    saveConversation();
+
+    closeSidebar();
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+    input.focus();
+
+  }
+);
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function saveCurrentChatToHistory(){
+
+  if(!conversation.length){
+
+    return;
+
+  }
+
+  const firstUserMessage =
+    conversation.find(
+      item => item.role === 'user'
+    );
+
+  if(!firstUserMessage){
+
+    return;
+
+  }
+
+  const title =
+    String(firstUserMessage.content)
+      .slice(0,38);
+
+  const existingIndex =
+    chatHistory.findIndex(
+      item => item.id === currentChatId
+    );
+
+  const item = {
+
+    id:currentChatId,
+
+    title:
+      title || 'New Chat',
+
+    messages:
+      conversation,
+
+    updatedAt:
+      Date.now()
+
+  };
+
+
+  if(existingIndex >= 0){
+
+    chatHistory[existingIndex] =
+      item;
+
+  }else{
+
+    chatHistory.unshift(item);
+
+  }
+
+
+  chatHistory =
+    chatHistory.slice(0,20);
+
+  saveHistory();
+
+  renderHistory();
+
+}
+
+
+function renderHistory(){
+
+  historyList.innerHTML = '';
+
+
+  if(!chatHistory.length){
+
+    const empty =
+      document.createElement('div');
+
+    empty.style.color =
+      '#625777';
+
+    empty.style.fontSize =
+      '13px';
+
+    empty.style.padding =
+      '10px 5px';
+
+    empty.textContent =
+      'No previous chats yet.';
+
+    historyList.appendChild(empty);
+
+    return;
+
+  }
+
+
+  chatHistory.forEach(item => {
+
+    const button =
+      document.createElement('button');
+
+    button.className =
+      'sidebar-chat';
+
+    button.type =
+      'button';
+
+
+    button.innerHTML =
+
+      '<span class="sidebar-chat-icon">💬</span>' +
+
+      '<span>' +
+      escapeHtml(item.title) +
+      '</span>';
+
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        loadChat(item);
+
+      }
+    );
+
+
+    historyList.appendChild(button);
+
+  });
+
+}
+
+
+function loadChat(item){
+
+  conversation =
+    Array.isArray(item.messages)
+      ? item.messages
+      : [];
+
+  currentChatId =
+    item.id;
+
+  chat.innerHTML = '';
+
+  chat.style.display =
+    conversation.length
+      ? 'block'
+      : 'none';
+
+
+  conversation.forEach(message => {
+
+    if(message.role === 'user'){
+
+      appendUserMessage(
+        message.content
+      );
+
+    }
+
+    if(message.role === 'assistant'){
+
+      appendBotMessage(
+        message.content
+      );
+
+    }
+
+  });
+
+
+  saveConversation();
+
+  closeSidebar();
+
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:'smooth'
+  });
+
+}
+
+
+/* =====================================================
+   MESSAGE UI
+===================================================== */
+
+function appendUserMessage(text){
+
+  chat.innerHTML +=
+    `<div class="message user">
+      ${escapeHtml(text)}
+    </div>`;
+
+}
+
+
+function appendBotMessage(text){
+
+  const id =
+    'bot-' + Date.now() +
+    '-' + Math.random()
+      .toString(36)
+      .slice(2);
+
+
+  chat.innerHTML +=
+
+    `<div class="message bot">
+
+      <b>Neutron</b><br>
+
+      ${escapeHtml(text)
+        .replace(/\n/g,'<br>')}
+
+      <div class="message-actions">
+
+        <button
+          class="copy-btn"
+          type="button"
+          onclick="copyMessage(this)"
+        >
+          Copy
+        </button>
+
+      </div>
+
+    </div>`;
+
+}
+
+
+function copyMessage(button){
+
+  const message =
+    button.closest('.message');
+
+  if(!message){
+
+    return;
+
+  }
+
+  const clone =
+    message.cloneNode(true);
+
+  const actions =
+    clone.querySelector(
+      '.message-actions'
+    );
+
+  if(actions){
+
+    actions.remove();
+
+  }
+
+  const text =
+    clone.innerText
+      .replace(/^Neutron\s*/,'')
+      .trim();
+
+
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+
+      button.textContent =
+        'Copied!';
+
+      setTimeout(() => {
+
+        button.textContent =
+          'Copy';
+
+      },1200);
+
+    })
+    .catch(() => {
+
+      button.textContent =
+        'Copy failed';
+
+    });
+
+}
+
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
+
+async function sendMessage(e){
+
+  e.preventDefault();
+
+  const text =
+    input.value.trim();
+
+
+  if(!text){
+
+    return;
+
+  }
+
+
+  chat.style.display =
+    'block';
+
+
+  appendUserMessage(text);
+
+
+  input.value = '';
+
+
+  conversation.push({
+
+    role:'user',
+
+    content:text
+
+  });
+
+
+  saveConversation();
+
+
+  const loadingId =
+    'neutron-loading-' +
+    Date.now();
+
+
+  chat.innerHTML +=
+
+    `<div
+      class="message bot"
+      id="${loadingId}"
+    >
+
+      <b>Neutron</b><br>
+
+      Thinking…
+
+    </div>`;
+
+
+
+  try{
+
+    const response =
+      await fetch('/api/chat',{
+
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
+
+        body:JSON.stringify({
+
+          message:text,
+
+          history:
+            conversation.slice(-20)
+
+        })
+
+      });
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        'Neutron could not respond.'
+      );
+
+    }
+
+
+    const reply =
+      typeof data.reply === 'string'
+
+        ? data.reply
+
+        : 'Neutron returned an empty response.';
+
+
+    conversation.push({
+
+      role:'assistant',
+
+      content:reply
+
+    });
+
+
+    saveConversation();
+
+
+    const loading =
+      document.getElementById(
+        loadingId
+      );
+
+
+    if(loading){
+
+      loading.outerHTML =
+
+        `<div class="message bot">
+
+          <b>Neutron</b><br>
+
+          ${escapeHtml(reply)
+            .replace(/\n/g,'<br>')}
+
+          <div class="message-actions">
+
+            <button
+              class="copy-btn"
+              type="button"
+              onclick="copyMessage(this)"
+            >
+              Copy
+            </button>
+
+          </div>
+
+        </div>`;
+
+    }
+
+
+    saveCurrentChatToHistory();
+
+
+  }catch(error){
+
+    const loading =
+      document.getElementById(
+        loadingId
+      );
+
+
+    const message =
+      error &&
+      error.message
+
+        ? error.message
+
+        : 'Something went wrong.';
+
+
+    if(loading){
+
+      loading.innerHTML =
+
+        `<b>Neutron</b><br>
+
+        Sorry, I couldn't connect right now.
+
+        <br>
+
+        <small>
+          ${escapeHtml(message)}
+        </small>`;
+
+    }
+
+  }
+
+
+}
+
+
+composer.addEventListener(
+  'submit',
+  sendMessage
+);
+
+
+/* =====================================================
+   TOOLS
+===================================================== */
+
+toolsBtn.addEventListener(
+  'click',
+  (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toolsMenu.classList.toggle('open');
+  }
+);
+
+
+plusBtn.addEventListener(
+  'click',
+  () => {
+
+    input.focus();
+
+  }
+);
+
+
+/* Calculator */
+
+calculatorTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+
+    const expression =
+      prompt(
+        'Enter a calculation, for example: 25 * 8'
+      );
+
+
+    if(!expression){
+
+      return;
+
+    }
+
+
+    try{
+
+      /*
+       Simple calculator.
+       Only mathematical characters
+       are accepted.
+      */
+
+      if(
+        !/^[0-9+\-*/().%\s]+$/
+          .test(expression)
+      ){
+
+        throw new Error(
+          'Invalid calculation.'
+        );
+
+      }
+
+
+      const result =
+        Function(
+          '"use strict"; return (' +
+          expression +
+          ')'
+        )();
+
+
+      input.value =
+        String(result);
+
+      input.focus();
+
+
+    }catch(error){
+
+      alert(
+        'That calculation is not valid.'
+      );
+
+    }
+
+  }
+);
+
+
+/* Web Search */
+
+webSearchTool.addEventListener(
+  'click',
+  async () => {
+
+    toolsMenu.classList.remove('open');
+
+    const query = window.prompt(
+      'What do you want Neutron to search for?'
+    );
+
+    if(!query || !query.trim()) return;
+
+    const cleanQuery = query.trim();
+    chat.style.display = 'block';
+
+    const loadingId = 'search-loading-' + Date.now();
+
+    chat.innerHTML +=
+      `<div class="message bot" id="${loadingId}">
+        <b>Neutron Web Search</b><br>
+        Searching the web for:<br>
+        <small>${escapeHtml(cleanQuery)}</small>
+      </div>`;
+
+    try{
+      const response = await fetch('/api/search',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({query:cleanQuery})
+      });
+
+      const data = await response.json();
+
+      if(!response.ok){
+        throw new Error(data.error || 'Web search failed.');
+      }
+
+      const results = Array.isArray(data.results) ? data.results : [];
+      const answer = typeof data.answer === 'string' ? data.answer.trim() : '';
+      const loading = document.getElementById(loadingId);
+
+      if(!loading) return;
+
+      if(!results.length){
+        loading.innerHTML = `<b>Neutron Web Search</b><br>No results were found for <b>${escapeHtml(cleanQuery)}</b>.`;
+        return;
+      }
+
+      const resultHtml = results.map((item,index) => {
+        const title = item.title || 'Untitled result';
+        const url = item.url || '#';
+        const content = item.content || 'No preview available.';
+        return `<div style="margin-top:12px;padding:12px;border:1px solid #2c194d;border-radius:12px;background:#0e0918;">
+          <div style="color:#b16dff;font-size:12px;margin-bottom:5px;">Result ${index+1}</div>
+          <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="color:#e8dcff;text-decoration:none;font-weight:650;">${escapeHtml(title)}</a>
+          <div style="color:#9185a7;font-size:13px;line-height:1.45;margin-top:6px;">${escapeHtml(content)}</div>
+          <div style="color:#765f96;font-size:11px;margin-top:7px;word-break:break-all;">${escapeHtml(url)}</div>
+        </div>`;
+      }).join('');
+
+      loading.innerHTML = `<b>Neutron Web Search</b>
+        ${answer ? `<div style="margin-top:12px;padding:14px;border:1px solid #5a2b8e;border-radius:14px;background:#160c25;">
+          <div style="color:#b16dff;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:7px;">AI ANSWER</div>
+          <div style="color:#eee7ff;line-height:1.6;">${escapeHtml(answer).replace(/\n/g,'<br>')}</div>
+        </div>` : ''}
+        <div style="margin-top:14px;"><b>Sources</b> for: <b>${escapeHtml(cleanQuery)}</b></div>
+        ${resultHtml}`;
+
+    }catch(error){
+      const loading = document.getElementById(loadingId);
+      if(loading){
+        loading.innerHTML = `<b>Neutron Web Search</b><br>Sorry, the web search failed.<br><small>${escapeHtml(error?.message || 'Something went wrong.')}</small>`;
+      }
+    }
+  }
+);
+
+
+/* Clear chat */
+
+clearChatTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+
+    conversation = [];
+
+    chat.innerHTML = '';
+
+    chat.style.display =
+      'none';
+
+    input.value = '';
+
+    saveConversation();
+
+    input.focus();
+
+  }
+);
+
+
+/* Focus */
+
+focusTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+    input.focus();
+
+  }
+);
+
+
+/* Close tools when tapping outside */
+
+document.addEventListener(
+  'click',
+  event => {
+
+    if(
+      !toolsMenu.contains(event.target) &&
+      !toolsBtn.contains(event.target)
+    ){
+
+      toolsMenu.classList.remove(
+        'open'
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+let recognition = null;
+
+let listening = false;
+
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+
+if(SpeechRecognition){
+
+  recognition =
+    new SpeechRecognition();
+
+
+  recognition.lang =
+    'en-IN';
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart = () => {
+
+    listening = true;
+
+    micBtn.classList.add(
+      'mic-active'
+    );
+
+    micBtn.textContent =
+      '●';
+
+  };
+
+
+  recognition.onresult =
+    event => {
+
+      const transcript =
+        event.results[0][0]
+          .transcript;
+
+      input.value =
+        transcript;
+
+      input.focus();
+
+    };
+
+
+  recognition.onerror =
+    event => {
+
+    console.log('Microphone error:', event.error);
+
+    listening = false;
+    micBtn.classList.remove('mic-active');
+    micBtn.textContent = '♩';
+
+    if(event.error === 'not-allowed' || event.error === 'service-not-allowed'){
+      alert('Microphone permission is blocked. Allow microphone access for Neutron in Chrome site settings, then try again.');
+    }else if(event.error === 'no-speech'){
+      alert('I did not hear anything. Please try again.');
+    }
+
+  };
+
+
+  recognition.onend = () => {
+
+    listening = false;
+
+    micBtn.classList.remove(
+      'mic-active'
+    );
+
+    micBtn.textContent =
+      '♩';
+
+  };
+
+
+  micBtn.addEventListener(
+    'click',
+    (event) => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(listening){
+
+        recognition.stop();
+
+        return;
+
+      }
+
+
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        console.log(
+          'Microphone could not start.'
+        );
+
+      }
+
+    }
+  );
+
+
+}else{
+
+  micBtn.addEventListener(
+    'click',
+    () => {
+
+      alert(
+        'Voice input is not supported by this browser.'
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   PWA INSTALL
+===================================================== */
+
+let deferredPrompt = null;
+
+
+window.addEventListener(
+  'beforeinstallprompt',
+  event => {
+
+    event.preventDefault();
+
+    deferredPrompt =
+      event;
+
+  }
+);
+
+
+installBtn.addEventListener(
+  'click',
+  async () => {
+
+    if(!deferredPrompt){
+
+      alert(
+        'Neutron is already installed, or Chrome is not ready to install it yet.'
+      );
+
+      return;
+
+    }
+
+
+    deferredPrompt.prompt();
+
+
+    await deferredPrompt.userChoice;
+
+
+    deferredPrompt =
+      null;
+
+  }
+);
+
+
+/* =====================================================
+   SERVICE WORKER
+===================================================== */
+
+if(
+  'serviceWorker' in navigator
+){
+
+  window.addEventListener(
+    'load',
+    () => {
+
+      navigator.serviceWorker
+        .register('/sw.js')
+        .catch(error => {
+
+          console.log(
+            'Neutron service worker registration failed:',
+            error
+          );
+
+        });
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   HTML SAFETY
+===================================================== */
+
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m => ({
+
+      '&':'&amp;',
+
+      '<':'&lt;',
+
+      '>':'&gt;',
+
+      '"':'&quot;',
+
+      "'":'&#039;'
+
+    }[m])
+  );
+
+}
+
+
+/* =====================================================
+   RESTORE CURRENT CHAT
+===================================================== */
+
+if(conversation.length){
+
+  chat.style.display =
+    'block';
+
+
+  conversation.forEach(
+    message => {
+
+      if(
+        message.role === 'user'
+      ){
+
+        appendUserMessage(
+          message.content
+        );
+
+      }
+
+
+      if(
+        message.role === 'assistant'
+      ){
+
+        appendBotMessage(
+          message.content
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   INITIALIZE HISTORY
+===================================================== */
+
+renderHistory();
+
+</script>
+
+</body>
+</html>
