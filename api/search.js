@@ -22,6 +22,8 @@ export default async function handler(req, res) {
       });
     }
 
+    const cleanQuery = query.trim();
+
     const response = await fetch("https://api.tavily.com/search", {
       method: "POST",
       headers: {
@@ -29,11 +31,11 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         api_key: apiKey,
-        query: query.trim(),
+        query: cleanQuery,
         search_depth: "basic",
         topic: "general",
         max_results: 5,
-        include_answer: false,
+        include_answer: true,
         include_raw_content: false
       })
     });
@@ -53,7 +55,8 @@ export default async function handler(req, res) {
     }));
 
     return res.status(200).json({
-      query: query.trim(),
+      query: cleanQuery,
+      answer: typeof data.answer === "string" ? data.answer : "",
       results
     });
 
