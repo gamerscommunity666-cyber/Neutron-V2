@@ -3,245 +3,776 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="theme-color" content="#07050f">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
 <title>Neutron V2</title>
+
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#07050f;color:#f5f1ff}
   body{display:flex;justify-content:center}
   button,input{font:inherit}
-  .app{width:min(100%,1100px);min-height:100vh;padding:18px 18px 30px;background:
-    radial-gradient(circle at 75% 12%,rgba(139,64,255,.12),transparent 28%),
-    radial-gradient(circle at 15% 55%,rgba(112,55,210,.08),transparent 30%),
-    #07050f}
-  header{height:72px;display:flex;align-items:center;gap:18px}
-  .icon-btn{border:0;background:none;color:#a970ff;font-size:30px;cursor:pointer;width:44px;height:44px}
-  .brand{display:flex;align-items:center;gap:14px;flex:1}
-  .atom{width:50px;height:50px;border:2px solid #9d5cff;border-radius:50%;display:grid;place-items:center;color:#b983ff;font-size:28px;box-shadow:0 0 25px rgba(157,92,255,.3)}
-  .brand-name{font-size:38px;font-weight:750;letter-spacing:-1px}
-  .badge{font-size:14px;color:#a970ff;border:1px solid #7133bf;border-radius:10px;padding:6px 12px}
-  .hero{border:1px solid #422078;border-radius:28px;padding:34px;margin-top:12px;background:linear-gradient(135deg,rgba(26,14,53,.78),rgba(9,7,19,.9));box-shadow:inset 0 0 50px rgba(125,55,230,.05)}
-  .hero-top{display:flex;gap:28px;align-items:center}
-  .spark{width:100px;height:100px;border-radius:50%;display:grid;place-items:center;border:1px solid #6331a0;color:#bf8cff;font-size:50px;box-shadow:0 0 45px rgba(145,69,255,.2)}
-  .eyebrow{color:#ad70ff;letter-spacing:5px;font-size:14px;font-weight:650}
-  h1{font-size:clamp(42px,7vw,76px);line-height:.98;margin:18px 0 12px;letter-spacing:-3px}
+
+  .app{
+    width:min(100%,1100px);
+    min-height:100vh;
+    padding:18px 18px 30px;
+    background:
+      radial-gradient(circle at 75% 12%,rgba(139,64,255,.12),transparent 28%),
+      radial-gradient(circle at 15% 55%,rgba(112,55,210,.08),transparent 30%),
+      #07050f
+  }
+
+  header{
+    height:72px;
+    display:flex;
+    align-items:center;
+    gap:18px
+  }
+
+  .icon-btn{
+    border:0;
+    background:none;
+    color:#a970ff;
+    font-size:30px;
+    cursor:pointer;
+    width:44px;
+    height:44px
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex:1
+  }
+
+  .atom{
+    width:50px;
+    height:50px;
+    border:2px solid #9d5cff;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#b983ff;
+    font-size:28px;
+    box-shadow:0 0 25px rgba(157,92,255,.3)
+  }
+
+  .brand-name{
+    font-size:38px;
+    font-weight:750;
+    letter-spacing:-1px
+  }
+
+  .badge{
+    font-size:14px;
+    color:#a970ff;
+    border:1px solid #7133bf;
+    border-radius:10px;
+    padding:6px 12px
+  }
+
+  .hero{
+    border:1px solid #422078;
+    border-radius:28px;
+    padding:34px;
+    margin-top:12px;
+    background:linear-gradient(135deg,rgba(26,14,53,.78),rgba(9,7,19,.9));
+    box-shadow:inset 0 0 50px rgba(125,55,230,.05)
+  }
+
+  .hero-top{
+    display:flex;
+    gap:28px;
+    align-items:center
+  }
+
+  .spark{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    border:1px solid #6331a0;
+    color:#bf8cff;
+    font-size:50px;
+    box-shadow:0 0 45px rgba(145,69,255,.2)
+  }
+
+  .eyebrow{
+    color:#ad70ff;
+    letter-spacing:5px;
+    font-size:14px;
+    font-weight:650
+  }
+
+  h1{
+    font-size:clamp(42px,7vw,76px);
+    line-height:.98;
+    margin:18px 0 12px;
+    letter-spacing:-3px
+  }
+
   h1 span{color:#b16dff}
-  .hero p{color:#9387ae;font-size:20px;line-height:1.45;margin:0;max-width:650px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
-  .card{min-height:215px;border:1px solid #3a2164;border-radius:25px;padding:26px;background:linear-gradient(145deg,rgba(22,14,43,.95),rgba(9,7,19,.95));cursor:pointer;transition:.2s}
-  .card:hover{transform:translateY(-2px);border-color:#7e43c5}
-  .card-icon{font-size:34px;color:#c18aff}
-  .arrow{float:right;color:#8d55d7;font-size:25px}
-  .card h2{font-size:23px;margin:22px 0 10px}
-  .card p{color:#9185a7;font-size:17px;line-height:1.4;margin:0}
-  .features{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:28px 6px 30px;color:#8f82aa;font-size:15px}
-  .features div{display:flex;align-items:center;gap:12px}
-  .feature-icon{color:#ae72ff;font-size:20px}
-  .composer{border:1px solid #8b45e6;border-radius:28px;padding:20px 20px 14px;background:linear-gradient(145deg,rgba(24,13,47,.98),rgba(9,7,19,.98));box-shadow:0 0 35px rgba(123,49,225,.12)}
-  .input{width:100%;border:0;outline:0;background:transparent;color:#fff;font-size:20px;padding:5px 2px 25px}
+
+  .hero p{
+    color:#9387ae;
+    font-size:20px;
+    line-height:1.45;
+    margin:0;
+    max-width:650px
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:28px
+  }
+
+  .card{
+    min-height:215px;
+    border:1px solid #3a2164;
+    border-radius:25px;
+    padding:26px;
+    background:linear-gradient(145deg,rgba(22,14,43,.95),rgba(9,7,19,.95));
+    cursor:pointer;
+    transition:.2s
+  }
+
+  .card:hover{
+    transform:translateY(-2px);
+    border-color:#7e43c5
+  }
+
+  .card-icon{
+    font-size:34px;
+    color:#c18aff
+  }
+
+  .arrow{
+    float:right;
+    color:#8d55d7;
+    font-size:25px
+  }
+
+  .card h2{
+    font-size:23px;
+    margin:22px 0 10px
+  }
+
+  .card p{
+    color:#9185a7;
+    font-size:17px;
+    line-height:1.4;
+    margin:0
+  }
+
+  .features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:28px 6px 30px;
+    color:#8f82aa;
+    font-size:15px
+  }
+
+  .features div{
+    display:flex;
+    align-items:center;
+    gap:12px
+  }
+
+  .feature-icon{
+    color:#ae72ff;
+    font-size:20px
+  }
+
+  .composer{
+    border:1px solid #8b45e6;
+    border-radius:28px;
+    padding:20px 20px 14px;
+    background:linear-gradient(145deg,rgba(24,13,47,.98),rgba(9,7,19,.98));
+    box-shadow:0 0 35px rgba(123,49,225,.12)
+  }
+
+  .input{
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:#fff;
+    font-size:20px;
+    padding:5px 2px 25px
+  }
+
   .input::placeholder{color:#766a91}
-  .controls{display:flex;align-items:center;gap:18px}
-  .controls button{border:0;background:transparent;color:#9b8cad;cursor:pointer}
-  .send{margin-left:auto;width:56px;height:56px;border-radius:18px;background:#a65cff!important;color:white!important;font-size:27px;box-shadow:0 0 22px rgba(166,92,255,.3)}
-  .footer{text-align:center;color:#706486;font-size:14px;margin-top:25px}
-  .chat{display:none;margin-top:20px}
-  .message{padding:15px 18px;border-radius:18px;margin:10px 0;max-width:80%;line-height:1.5}
-  .user{margin-left:auto;background:#221838}
-  .bot{background:#120c20;border:1px solid #2c194d}
+
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:18px
+  }
+
+  .controls button{
+    border:0;
+    background:transparent;
+    color:#9b8cad;
+    cursor:pointer
+  }
+
+  .send{
+    margin-left:auto;
+    width:56px;
+    height:56px;
+    border-radius:18px;
+    background:#a65cff!important;
+    color:white!important;
+    font-size:27px;
+    box-shadow:0 0 22px rgba(166,92,255,.3)
+  }
+
+  .footer{
+    text-align:center;
+    color:#706486;
+    font-size:14px;
+    margin-top:25px
+  }
+
+  .chat{
+    display:none;
+    margin-top:20px
+  }
+
+  .message{
+    padding:15px 18px;
+    border-radius:18px;
+    margin:10px 0;
+    max-width:80%;
+    line-height:1.5
+  }
+
+  .user{
+    margin-left:auto;
+    background:#221838
+  }
+
+  .bot{
+    background:#120c20;
+    border:1px solid #2c194d
+  }
+
+  *{max-width:100%}
+
+  body{overflow-x:hidden}
+
+  .hero,
+  .hero-top,
+  .brand,
+  .grid,
+  .card,
+  .features,
+  .composer{
+    min-width:0
+  }
+
+  .hero-top{
+    flex-wrap:wrap
+  }
+
+  .hero-top>div:last-child{
+    min-width:0;
+    flex:1 1 260px
+  }
+
+  h1{
+    overflow-wrap:anywhere;
+    word-break:normal
+  }
+
+  .hero p,
+  .card h2,
+  .card p,
+  .features div{
+    overflow-wrap:anywhere
+  }
+
+  .grid{min-width:0}
+
+  .card{overflow:hidden}
+
   @media(max-width:650px){
-    .app{padding:12px 12px 24px}
-    header{height:62px}
-    .brand-name{font-size:29px}
-    .atom{width:42px;height:42px;font-size:23px}
-    .hero{padding:23px 20px;border-radius:22px}
-    .hero-top{align-items:flex-start}
-    .spark{width:68px;height:68px;font-size:34px;flex:none}
-    .eyebrow{font-size:11px;letter-spacing:3px}
-    h1{font-size:48px;letter-spacing:-2px}
-    .hero p{font-size:16px}
-    .grid{gap:12px}
-    .card{min-height:185px;padding:20px;border-radius:20px}
-    .card h2{font-size:18px;margin-top:16px}
-    .card p{font-size:14px}
-    .features{font-size:13px}
-    .composer{border-radius:22px}
+    .app{
+      width:100%;
+      padding:12px 10px 24px
+    }
+
+    header{
+      height:62px;
+      gap:8px
+    }
+
+    .brand{gap:9px}
+
+    .brand-name{
+      font-size:27px;
+      white-space:nowrap
+    }
+
+    .atom{
+      width:42px;
+      height:42px;
+      font-size:23px
+    }
+
+    .badge{
+      font-size:11px;
+      padding:5px 8px
+    }
+
+    .hero{
+      padding:20px 16px;
+      border-radius:22px
+    }
+
+    .hero-top{
+      display:block
+    }
+
+    .spark{
+      width:68px;
+      height:68px;
+      font-size:34px;
+      margin-bottom:16px
+    }
+
+    .eyebrow{
+      font-size:11px;
+      letter-spacing:2px;
+      line-height:1.3
+    }
+
+    h1{
+      font-size:40px;
+      line-height:1.02;
+      letter-spacing:-1.5px
+    }
+
+    .hero p{font-size:15px}
+
+    .grid{
+      grid-template-columns:1fr;
+      gap:12px
+    }
+
+    .card{
+      min-height:0;
+      padding:20px
+    }
+
+    .card h2{
+      font-size:19px;
+      line-height:1.2
+    }
+
+    .card p{
+      font-size:14px;
+      line-height:1.4
+    }
+
+    .features{
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-left:2px;
+      margin-right:2px;
+      font-size:13px
+    }
+
+    .composer{
+      padding:16px 14px 12px;
+      border-radius:22px
+    }
+
+    .input{
+      font-size:17px;
+      padding-bottom:20px
+    }
+
+    .controls{gap:12px}
+
+    .controls button{font-size:14px}
+
+    .send{
+      width:50px;
+      height:50px;
+      flex:none
+    }
   }
 </style>
-
-<style id="mobile-fix">
-*{max-width:100%}
-body{overflow-x:hidden}
-.hero,.hero-top,.brand,.grid,.card,.features,.composer{min-width:0}
-.hero-top{flex-wrap:wrap}
-.hero-top>div:last-child{min-width:0;flex:1 1 260px}
-h1{overflow-wrap:anywhere;word-break:normal}
-.hero p,.card h2,.card p,.features div{overflow-wrap:anywhere}
-.grid{min-width:0}
-.card{overflow:hidden}
-@media(max-width:650px){
-  .app{width:100%;padding-left:10px;padding-right:10px}
-  header{gap:8px}
-  .brand{gap:9px}
-  .brand-name{font-size:27px;white-space:nowrap}
-  .badge{font-size:11px;padding:5px 8px}
-  .hero{padding:20px 16px}
-  .hero-top{display:block}
-  .spark{margin-bottom:16px}
-  .eyebrow{letter-spacing:2px;line-height:1.3}
-  h1{font-size:40px;line-height:1.02;letter-spacing:-1.5px}
-  .hero p{font-size:15px}
-  .grid{grid-template-columns:1fr;gap:12px}
-  .card{min-height:0;padding:20px}
-  .card h2{font-size:19px;line-height:1.2}
-  .card p{font-size:14px;line-height:1.4}
-  .features{grid-template-columns:1fr;gap:10px;margin-left:2px;margin-right:2px}
-  .composer{padding:16px 14px 12px}
-  .input{font-size:17px;padding-bottom:20px}
-  .controls{gap:12px}
-  .controls button{font-size:14px}
-  .send{width:50px;height:50px;flex:none}
-}
-</style>
-
 </head>
+
 <body>
+
 <div class="app">
+
   <header>
     <button class="icon-btn" aria-label="Menu">☰</button>
+
     <div class="brand">
       <div class="atom">⚛</div>
       <div class="brand-name">Neutron</div>
       <div class="badge">V2</div>
     </div>
-    <button class="icon-btn" aria-label="Download">⇩</button>
+
+    <button class="icon-btn" id="installBtn" aria-label="Install Neutron">⇩</button>
   </header>
 
   <section class="hero">
     <div class="hero-top">
+
       <div class="spark">✦</div>
+
       <div>
         <div class="eyebrow">YOUR PERSONAL INTELLIGENCE</div>
-        <h1>Big ideas.<br><span>Infinite possibilities.</span></h1>
-        <p>Meet Neutron. Your thinking partner for anything.</p>
+
+        <h1>
+          Big ideas.<br>
+          <span>Infinite possibilities.</span>
+        </h1>
+
+        <p>
+          Meet Neutron. Your thinking partner for anything.
+        </p>
       </div>
+
     </div>
   </section>
 
   <section class="grid">
+
     <article class="card" onclick="starter('Make something new')">
-      <span class="card-icon">✦</span><span class="arrow">↗</span>
+      <span class="card-icon">✦</span>
+      <span class="arrow">↗</span>
+
       <h2>Make something new</h2>
-      <p>Turn a spark into your next big idea</p>
+
+      <p>
+        Turn a spark into your next big idea
+      </p>
     </article>
+
     <article class="card" onclick="starter('Build with me')">
-      <span class="card-icon">&lt;/&gt;</span><span class="arrow">↗</span>
+      <span class="card-icon">&lt;/&gt;</span>
+      <span class="arrow">↗</span>
+
       <h2>Build with me</h2>
-      <p>From first line to final masterpiece</p>
+
+      <p>
+        From first line to final masterpiece
+      </p>
     </article>
+
     <article class="card" onclick="starter('Go down a rabbit hole')">
-      <span class="card-icon">▢</span><span class="arrow">↗</span>
+      <span class="card-icon">▢</span>
+      <span class="arrow">↗</span>
+
       <h2>Go down a rabbit hole</h2>
-      <p>Make the complex feel beautifully simple</p>
+
+      <p>
+        Make the complex feel beautifully simple
+      </p>
     </article>
+
     <article class="card" onclick="starter('Find your next move')">
-      <span class="card-icon">◈</span><span class="arrow">↗</span>
+      <span class="card-icon">◈</span>
+      <span class="arrow">↗</span>
+
       <h2>Find your next move</h2>
-      <p>A clearer plan. A better starting point.</p>
+
+      <p>
+        A clearer plan. A better starting point.
+      </p>
     </article>
+
   </section>
 
   <section class="features">
-    <div><span class="feature-icon">✦</span>A space for big thinking</div>
-    <div><span class="feature-icon">&lt;/&gt;</span>Built for your workflow</div>
-    <div><span class="feature-icon">♢</span>Local chat history</div>
+
+    <div>
+      <span class="feature-icon">✦</span>
+      A space for big thinking
+    </div>
+
+    <div>
+      <span class="feature-icon">&lt;/&gt;</span>
+      Built for your workflow
+    </div>
+
+    <div>
+      <span class="feature-icon">♢</span>
+      Local chat history
+    </div>
+
   </section>
 
   <section class="chat" id="chat"></section>
 
   <form class="composer" onsubmit="sendMessage(event)">
-    <input id="prompt" class="input" placeholder="Ask Neutron anything..." autocomplete="off">
+
+    <input
+      id="prompt"
+      class="input"
+      placeholder="Ask Neutron anything..."
+      autocomplete="off"
+    >
+
     <div class="controls">
-      <button type="button" onclick="document.getElementById('prompt').focus()">＋</button>
+
+      <button
+        type="button"
+        onclick="document.getElementById('prompt').focus()"
+      >
+        ＋
+      </button>
+
       <span style="color:#2e2540">|</span>
-      <button type="button">☷ &nbsp;Tools</button>
-      <button type="button" onclick="alert('Voice input will be connected in the next step.')">♩</button>
-      <button class="send" type="submit">↑</button>
+
+      <button type="button">
+        ☷ &nbsp;Tools
+      </button>
+
+      <button
+        type="button"
+        onclick="alert('Voice input will be connected in the next step.')"
+      >
+        ♩
+      </button>
+
+      <button
+        class="send"
+        type="submit"
+      >
+        ↑
+      </button>
+
     </div>
+
   </form>
 
-  <div class="footer">Neutron is always here. Ask, explore, create.</div>
+  <div class="footer">
+    Neutron is always here. Ask, explore, create.
+  </div>
+
 </div>
 
 <script>
+
 const conversation = [];
 
+/* Starter buttons */
+
 function starter(text){
-  document.getElementById('prompt').value=text;
+  document.getElementById('prompt').value = text;
   document.getElementById('prompt').focus();
 }
 
+/* Chat */
+
 async function sendMessage(e){
+
   e.preventDefault();
 
   const input = document.getElementById('prompt');
   const text = input.value.trim();
+
   if(!text) return;
 
   const chat = document.getElementById('chat');
+
   chat.style.display = 'block';
 
-  chat.innerHTML += `<div class="message user">${escapeHtml(text)}</div>`;
+  chat.innerHTML +=
+    `<div class="message user">${escapeHtml(text)}</div>`;
+
   input.value = '';
 
-  conversation.push({ role: 'user', content: text });
+  conversation.push({
+    role: 'user',
+    content: text
+  });
 
-  const loadingId = 'neutron-loading-' + Date.now();
-  chat.innerHTML += `<div class="message bot" id="${loadingId}"><b>Neutron</b><br>Thinking…</div>`;
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  const loadingId =
+    'neutron-loading-' + Date.now();
+
+  chat.innerHTML +=
+    `<div class="message bot" id="${loadingId}">
+      <b>Neutron</b><br>
+      Thinking…
+    </div>`;
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
 
   try {
+
     const response = await fetch('/api/chat', {
+
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
       body: JSON.stringify({
         message: text,
         history: conversation.slice(-20)
       })
+
     });
 
     const data = await response.json();
 
     if(!response.ok){
-      throw new Error(data.error || 'Neutron could not respond.');
+      throw new Error(
+        data.error || 'Neutron could not respond.'
+      );
     }
 
-    const reply = typeof data.reply === 'string' ? data.reply : 'Neutron returned an empty response.';
-    conversation.push({ role: 'assistant', content: reply });
+    const reply =
+      typeof data.reply === 'string'
+        ? data.reply
+        : 'Neutron returned an empty response.';
 
-    const loading = document.getElementById(loadingId);
+    conversation.push({
+      role: 'assistant',
+      content: reply
+    });
+
+    const loading =
+      document.getElementById(loadingId);
+
     if(loading){
-      loading.innerHTML = `<b>Neutron</b><br>${escapeHtml(reply).replace(/\n/g, "<br>")}`;
+
+      loading.innerHTML =
+        `<b>Neutron</b><br>` +
+        escapeHtml(reply).replace(/\n/g, "<br>");
+
     }
-  } catch(error) {
-    const loading = document.getElementById(loadingId);
-    const message = error && error.message ? error.message : 'Something went wrong.';
+
+  } catch(error){
+
+    const loading =
+      document.getElementById(loadingId);
+
+    const message =
+      error && error.message
+        ? error.message
+        : 'Something went wrong.';
+
     if(loading){
-      loading.innerHTML = `<b>Neutron</b><br>Sorry, I couldn't connect right now.<br><small>${escapeHtml(message)}</small>`;
+
+      loading.innerHTML =
+        `<b>Neutron</b><br>
+        Sorry, I couldn't connect right now.<br>
+        <small>${escapeHtml(message)}</small>`;
+
     }
+
   }
 
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+
 }
 
+/* HTML safety */
+
 function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({
+
+  return String(s).replace(/[&<>"']/g, m => ({
     '&':'&amp;',
     '<':'&lt;',
     '>':'&gt;',
     '"':'&quot;',
     "'":'&#039;'
   }[m]));
+
 }
+
+/* PWA installation */
+
+let deferredPrompt = null;
+
+const installBtn =
+  document.getElementById('installBtn');
+
+window.addEventListener(
+  'beforeinstallprompt',
+  (event) => {
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+  }
+);
+
+installBtn.addEventListener(
+  'click',
+  async () => {
+
+    if(!deferredPrompt){
+
+      alert(
+        'Neutron is already installed, or Chrome is not ready to install it yet.'
+      );
+
+      return;
+
+    }
+
+    deferredPrompt.prompt();
+
+    await deferredPrompt.userChoice;
+
+    deferredPrompt = null;
+
+  }
+);
+
+/* Register the service worker */
+
+if('serviceWorker' in navigator){
+
+  window.addEventListener(
+    'load',
+    () => {
+
+      navigator.serviceWorker
+        .register('/sw.js')
+        .catch(error => {
+          console.log(
+            'Neutron service worker registration failed:',
+            error
+          );
+        });
+
+    }
+  );
+
+}
+
 </script>
+
 </body>
 </html>
