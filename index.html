@@ -1,529 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#07050f">
-<meta name="mobile-web-app-capable" content="yes">
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#07050f"
+>
+
+<meta
+  name="mobile-web-app-capable"
+  content="yes"
+>
 
 <link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="/icon-192.png">
+
+<link
+  rel="apple-touch-icon"
+  href="/icon-192.png"
+>
 
 <title>Neutron V2</title>
 
 <style>
-  *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#07050f;color:#f5f1ff}
-  body{display:flex;justify-content:center}
-  button,input{font:inherit}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background:#07050f;
+  color:#f5f1ff;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.app{
+  width:min(100%,1100px);
+  min-height:100vh;
+  padding:18px 18px 30px;
+
+  background:
+    radial-gradient(
+      circle at 75% 12%,
+      rgba(139,64,255,.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 15% 55%,
+      rgba(112,55,210,.08),
+      transparent 30%
+    ),
+    #07050f;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  height:72px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.icon-btn{
+  border:0;
+  background:none;
+  color:#a970ff;
+  font-size:30px;
+  cursor:pointer;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+}
+
+.icon-btn:active{
+  background:#181024;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:1;
+  min-width:0;
+}
+
+.atom{
+  width:50px;
+  height:50px;
+  border:2px solid #9d5cff;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#b983ff;
+  font-size:28px;
+  box-shadow:
+    0 0 25px rgba(157,92,255,.3);
+  flex:none;
+}
+
+.brand-name{
+  font-size:38px;
+  font-weight:750;
+  letter-spacing:-1px;
+}
+
+.badge{
+  font-size:14px;
+  color:#a970ff;
+  border:1px solid #7133bf;
+  border-radius:10px;
+  padding:6px 12px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  border:1px solid #422078;
+  border-radius:28px;
+  padding:34px;
+  margin-top:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(26,14,53,.78),
+      rgba(9,7,19,.9)
+    );
+
+  box-shadow:
+    inset 0 0 50px rgba(125,55,230,.05);
+}
+
+.hero-top{
+  display:flex;
+  gap:28px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.spark{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  border:1px solid #6331a0;
+  color:#bf8cff;
+  font-size:50px;
+
+  box-shadow:
+    0 0 45px rgba(145,69,255,.2);
+
+  flex:none;
+}
+
+.hero-top>div:last-child{
+  min-width:0;
+  flex:1 1 260px;
+}
+
+.eyebrow{
+  color:#ad70ff;
+  letter-spacing:5px;
+  font-size:14px;
+  font-weight:650;
+}
+
+h1{
+  font-size:clamp(42px,7vw,76px);
+  line-height:.98;
+  margin:18px 0 12px;
+  letter-spacing:-3px;
+  overflow-wrap:anywhere;
+}
+
+h1 span{
+  color:#b16dff;
+}
+
+.hero p{
+  color:#9387ae;
+  font-size:20px;
+  line-height:1.45;
+  margin:0;
+  max-width:650px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:28px;
+}
+
+.card{
+  min-height:215px;
+  border:1px solid #3a2164;
+  border-radius:25px;
+  padding:26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,14,43,.95),
+      rgba(9,7,19,.95)
+    );
+
+  cursor:pointer;
+  transition:.2s;
+  overflow:hidden;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  border-color:#7e43c5;
+}
+
+.card:active{
+  transform:scale(.99);
+}
+
+.card-icon{
+  font-size:34px;
+  color:#c18aff;
+}
+
+.arrow{
+  float:right;
+  color:#8d55d7;
+  font-size:25px;
+}
+
+.card h2{
+  font-size:23px;
+  margin:22px 0 10px;
+  overflow-wrap:anywhere;
+}
+
+.card p{
+  color:#9185a7;
+  font-size:17px;
+  line-height:1.4;
+  margin:0;
+  overflow-wrap:anywhere;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:28px 6px 30px;
+  color:#8f82aa;
+  font-size:15px;
+}
+
+.features div{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.feature-icon{
+  color:#ae72ff;
+  font-size:20px;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat{
+  display:none;
+  margin-top:20px;
+}
+
+.message{
+  position:relative;
+  padding:15px 18px;
+  border-radius:18px;
+  margin:10px 0;
+  max-width:85%;
+  line-height:1.5;
+  word-break:break-word;
+}
+
+.user{
+  margin-left:auto;
+  background:#221838;
+  border:1px solid #39245a;
+}
+
+.bot{
+  background:#120c20;
+  border:1px solid #2c194d;
+}
+
+.message-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.copy-btn{
+  border:1px solid #3a2164;
+  background:#181025;
+  color:#9b8cad;
+  border-radius:8px;
+  padding:5px 9px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.copy-btn:active{
+  transform:scale(.97);
+}
+
+/* =========================
+   COMPOSER
+========================= */
+
+.composer{
+  border:1px solid #8b45e6;
+  border-radius:28px;
+  padding:20px 20px 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24,13,47,.98),
+      rgba(9,7,19,.98)
+    );
+
+  box-shadow:
+    0 0 35px rgba(123,49,225,.12);
+
+  position:relative;
+}
+
+.input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  font-size:20px;
+  padding:5px 2px 25px;
+}
+
+.input::placeholder{
+  color:#766a91;
+}
+
+.controls{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.controls button{
+  border:0;
+  background:transparent;
+  color:#9b8cad;
+  cursor:pointer;
+}
+
+.tool-button{
+  padding:7px 8px;
+  border-radius:10px;
+}
+
+.tool-button:hover{
+  background:#191027;
+}
+
+.mic-active{
+  color:#d19cff!important;
+  text-shadow:
+    0 0 12px rgba(177,109,255,.7);
+}
+
+.send{
+  margin-left:auto;
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  background:#a65cff!important;
+  color:white!important;
+  font-size:27px;
+  box-shadow:
+    0 0 22px rgba(166,92,255,.3);
+}
+
+/* =========================
+   TOOLS MENU
+========================= */
+
+.tools-menu{
+  position:absolute;
+  left:18px;
+  bottom:82px;
+
+  width:220px;
+
+  border:1px solid #4a2675;
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27,15,52,.98),
+      rgba(10,7,20,.99)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.45);
+
+  padding:8px;
+
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+
+  transition:.2s;
+  z-index:30;
+}
+
+.tools-menu.open{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.tool-item{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#d9cff0;
+  padding:12px;
+  text-align:left;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.tool-item:hover{
+  background:#1d1230;
+}
+
+.tool-item span{
+  color:#b16dff;
+  margin-right:9px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.58);
+  backdrop-filter:blur(3px);
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.25s;
+
+  z-index:90;
+}
+
+.sidebar-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:310px;
+  max-width:86vw;
+  height:100vh;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(25,13,48,.99),
+      rgba(7,5,15,.99)
+    );
+
+  border-right:1px solid #422078;
+
+  box-shadow:
+    10px 0 45px rgba(0,0,0,.5);
+
+  transform:translateX(-105%);
+  transition:.3s ease;
+
+  z-index:100;
+
+  padding:20px;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.sidebar.open{
+  transform:translateX(0);
+}
+
+.sidebar-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.sidebar-title{
+  font-size:25px;
+  font-weight:750;
+}
+
+.sidebar-close{
+  border:0;
+  background:transparent;
+  color:#a970ff;
+  font-size:30px;
+  cursor:pointer;
+
+  width:42px;
+  height:42px;
+  border-radius:12px;
+}
+
+.sidebar-close:active{
+  background:#181024;
+}
+
+.new-chat{
+  width:100%;
+
+  border:1px solid #8b45e6;
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8f4de0,
+      #a65cff
+    );
+
+  color:white;
+
+  padding:14px 16px;
+
+  font-size:16px;
+  font-weight:650;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 20px rgba(166,92,255,.2);
+
+  margin-bottom:25px;
+}
+
+.new-chat:active{
+  transform:scale(.98);
+}
+
+.sidebar-section{
+  color:#766a91;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin:5px 5px 10px;
+}
+
+.history-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  overflow-y:auto;
+}
+
+.sidebar-chat{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  width:100%;
+
+  border:1px solid #2c194d;
+  border-radius:14px;
+
+  background:#120c20;
+
+  color:#d9cff0;
+
+  padding:13px;
+
+  text-align:left;
+  cursor:pointer;
+}
+
+.sidebar-chat:hover{
+  border-color:#6d3daf;
+  background:#1a102c;
+}
+
+.sidebar-chat-icon{
+  color:#ae72ff;
+  font-size:19px;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+  color:#625777;
+  font-size:12px;
+  text-align:center;
+  padding-top:20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  text-align:center;
+  color:#706486;
+  font-size:14px;
+  margin-top:25px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
 
   .app{
-    width:min(100%,1100px);
-    min-height:100vh;
-    padding:18px 18px 30px;
-    background:
-      radial-gradient(circle at 75% 12%,rgba(139,64,255,.12),transparent 28%),
-      radial-gradient(circle at 15% 55%,rgba(112,55,210,.08),transparent 30%),
-      #07050f
+    width:100%;
+    padding:12px 10px 24px;
   }
 
   header{
-    height:72px;
-    display:flex;
-    align-items:center;
-    gap:18px
-  }
-
-  .icon-btn{
-    border:0;
-    background:none;
-    color:#a970ff;
-    font-size:30px;
-    cursor:pointer;
-    width:44px;
-    height:44px
+    height:62px;
+    gap:8px;
   }
 
   .brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    flex:1
-  }
-
-  .atom{
-    width:50px;
-    height:50px;
-    border:2px solid #9d5cff;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    color:#b983ff;
-    font-size:28px;
-    box-shadow:0 0 25px rgba(157,92,255,.3)
+    gap:9px;
   }
 
   .brand-name{
-    font-size:38px;
-    font-weight:750;
-    letter-spacing:-1px
+    font-size:27px;
+    white-space:nowrap;
+  }
+
+  .atom{
+    width:42px;
+    height:42px;
+    font-size:23px;
   }
 
   .badge{
-    font-size:14px;
-    color:#a970ff;
-    border:1px solid #7133bf;
-    border-radius:10px;
-    padding:6px 12px
+    font-size:11px;
+    padding:5px 8px;
   }
 
   .hero{
-    border:1px solid #422078;
-    border-radius:28px;
-    padding:34px;
-    margin-top:12px;
-    background:linear-gradient(135deg,rgba(26,14,53,.78),rgba(9,7,19,.9));
-    box-shadow:inset 0 0 50px rgba(125,55,230,.05)
+    padding:20px 16px;
+    border-radius:22px;
   }
 
   .hero-top{
-    display:flex;
-    gap:28px;
-    align-items:center
+    display:block;
   }
 
   .spark{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    border:1px solid #6331a0;
-    color:#bf8cff;
-    font-size:50px;
-    box-shadow:0 0 45px rgba(145,69,255,.2)
+    width:68px;
+    height:68px;
+    font-size:34px;
+    margin-bottom:16px;
   }
 
   .eyebrow{
-    color:#ad70ff;
-    letter-spacing:5px;
-    font-size:14px;
-    font-weight:650
+    font-size:11px;
+    letter-spacing:2px;
+    line-height:1.3;
   }
 
   h1{
-    font-size:clamp(42px,7vw,76px);
-    line-height:.98;
-    margin:18px 0 12px;
-    letter-spacing:-3px
+    font-size:40px;
+    line-height:1.02;
+    letter-spacing:-1.5px;
   }
 
-  h1 span{color:#b16dff}
-
   .hero p{
-    color:#9387ae;
-    font-size:20px;
-    line-height:1.45;
-    margin:0;
-    max-width:650px
+    font-size:15px;
   }
 
   .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    margin-top:28px
+    grid-template-columns:1fr;
+    gap:12px;
   }
 
   .card{
-    min-height:215px;
-    border:1px solid #3a2164;
-    border-radius:25px;
-    padding:26px;
-    background:linear-gradient(145deg,rgba(22,14,43,.95),rgba(9,7,19,.95));
-    cursor:pointer;
-    transition:.2s
-  }
-
-  .card:hover{
-    transform:translateY(-2px);
-    border-color:#7e43c5
-  }
-
-  .card-icon{
-    font-size:34px;
-    color:#c18aff
-  }
-
-  .arrow{
-    float:right;
-    color:#8d55d7;
-    font-size:25px
+    min-height:0;
+    padding:20px;
   }
 
   .card h2{
-    font-size:23px;
-    margin:22px 0 10px
+    font-size:19px;
+    line-height:1.2;
   }
 
   .card p{
-    color:#9185a7;
-    font-size:17px;
+    font-size:14px;
     line-height:1.4;
-    margin:0
   }
 
   .features{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin:28px 6px 30px;
-    color:#8f82aa;
-    font-size:15px
-  }
-
-  .features div{
-    display:flex;
-    align-items:center;
-    gap:12px
-  }
-
-  .feature-icon{
-    color:#ae72ff;
-    font-size:20px
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-left:2px;
+    margin-right:2px;
+    font-size:13px;
   }
 
   .composer{
-    border:1px solid #8b45e6;
-    border-radius:28px;
-    padding:20px 20px 14px;
-    background:linear-gradient(145deg,rgba(24,13,47,.98),rgba(9,7,19,.98));
-    box-shadow:0 0 35px rgba(123,49,225,.12)
+    padding:16px 14px 12px;
+    border-radius:22px;
   }
 
   .input{
-    width:100%;
-    border:0;
-    outline:0;
-    background:transparent;
-    color:#fff;
-    font-size:20px;
-    padding:5px 2px 25px
+    font-size:17px;
+    padding-bottom:20px;
   }
 
-  .input::placeholder{color:#766a91}
-
   .controls{
-    display:flex;
-    align-items:center;
-    gap:18px
+    gap:10px;
   }
 
   .controls button{
-    border:0;
-    background:transparent;
-    color:#9b8cad;
-    cursor:pointer
+    font-size:14px;
   }
 
   .send{
-    margin-left:auto;
-    width:56px;
-    height:56px;
-    border-radius:18px;
-    background:#a65cff!important;
-    color:white!important;
-    font-size:27px;
-    box-shadow:0 0 22px rgba(166,92,255,.3)
+    width:50px;
+    height:50px;
+    flex:none;
   }
 
-  .footer{
-    text-align:center;
-    color:#706486;
-    font-size:14px;
-    margin-top:25px
-  }
-
-  .chat{
-    display:none;
-    margin-top:20px
+  .tools-menu{
+    left:12px;
+    bottom:76px;
+    width:210px;
   }
 
   .message{
-    padding:15px 18px;
-    border-radius:18px;
-    margin:10px 0;
-    max-width:80%;
-    line-height:1.5
+    max-width:92%;
   }
 
-  .user{
-    margin-left:auto;
-    background:#221838
-  }
+}
 
-  .bot{
-    background:#120c20;
-    border:1px solid #2c194d
-  }
+/* Prevent weird horizontal overflow */
 
-  *{max-width:100%}
+*{
+  max-width:100%;
+}
 
-  body{overflow-x:hidden}
-
-  .hero,
-  .hero-top,
-  .brand,
-  .grid,
-  .card,
-  .features,
-  .composer{
-    min-width:0
-  }
-
-  .hero-top{
-    flex-wrap:wrap
-  }
-
-  .hero-top>div:last-child{
-    min-width:0;
-    flex:1 1 260px
-  }
-
-  h1{
-    overflow-wrap:anywhere;
-    word-break:normal
-  }
-
-  .hero p,
-  .card h2,
-  .card p,
-  .features div{
-    overflow-wrap:anywhere
-  }
-
-  .grid{min-width:0}
-
-  .card{overflow:hidden}
-
-  @media(max-width:650px){
-    .app{
-      width:100%;
-      padding:12px 10px 24px
-    }
-
-    header{
-      height:62px;
-      gap:8px
-    }
-
-    .brand{gap:9px}
-
-    .brand-name{
-      font-size:27px;
-      white-space:nowrap
-    }
-
-    .atom{
-      width:42px;
-      height:42px;
-      font-size:23px
-    }
-
-    .badge{
-      font-size:11px;
-      padding:5px 8px
-    }
-
-    .hero{
-      padding:20px 16px;
-      border-radius:22px
-    }
-
-    .hero-top{
-      display:block
-    }
-
-    .spark{
-      width:68px;
-      height:68px;
-      font-size:34px;
-      margin-bottom:16px
-    }
-
-    .eyebrow{
-      font-size:11px;
-      letter-spacing:2px;
-      line-height:1.3
-    }
-
-    h1{
-      font-size:40px;
-      line-height:1.02;
-      letter-spacing:-1.5px
-    }
-
-    .hero p{font-size:15px}
-
-    .grid{
-      grid-template-columns:1fr;
-      gap:12px
-    }
-
-    .card{
-      min-height:0;
-      padding:20px
-    }
-
-    .card h2{
-      font-size:19px;
-      line-height:1.2
-    }
-
-    .card p{
-      font-size:14px;
-      line-height:1.4
-    }
-
-    .features{
-      grid-template-columns:1fr;
-      gap:10px;
-      margin-left:2px;
-      margin-right:2px;
-      font-size:13px
-    }
-
-    .composer{
-      padding:16px 14px 12px;
-      border-radius:22px
-    }
-
-    .input{
-      font-size:17px;
-      padding-bottom:20px
-    }
-
-    .controls{gap:12px}
-
-    .controls button{font-size:14px}
-
-    .send{
-      width:50px;
-      height:50px;
-      flex:none
-    }
-  }
 </style>
+
 </head>
 
 <body>
 
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<div
+  class="sidebar-overlay"
+  id="sidebarOverlay"
+></div>
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
+
+  <div class="sidebar-header">
+
+    <div class="sidebar-title">
+      Neutron
+    </div>
+
+    <button
+      class="sidebar-close"
+      id="sidebarClose"
+      aria-label="Close sidebar"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <button
+    class="new-chat"
+    id="newChatBtn"
+  >
+    ＋ &nbsp; New Chat
+  </button>
+
+  <div class="sidebar-section">
+    Conversations
+  </div>
+
+  <div
+    class="history-list"
+    id="historyList"
+  ></div>
+
+  <div class="sidebar-bottom">
+    Neutron V2<br>
+    Your personal intelligence.
+  </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN APP
+========================= -->
+
 <div class="app">
 
   <header>
-    <button class="icon-btn" aria-label="Menu">☰</button>
+
+    <button
+      class="icon-btn"
+      id="menuBtn"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
 
     <div class="brand">
-      <div class="atom">⚛</div>
-      <div class="brand-name">Neutron</div>
-      <div class="badge">V2</div>
+
+      <div class="atom">
+        ⚛
+      </div>
+
+      <div class="brand-name">
+        Neutron
+      </div>
+
+      <div class="badge">
+        V2
+      </div>
+
     </div>
 
-    <button class="icon-btn" id="installBtn" aria-label="Install Neutron">⇩</button>
+    <button
+      class="icon-btn"
+      id="installBtn"
+      aria-label="Install Neutron"
+    >
+      ⇩
+    </button>
+
   </header>
 
+
+  <!-- HERO -->
+
   <section class="hero">
+
     <div class="hero-top">
 
-      <div class="spark">✦</div>
+      <div class="spark">
+        ✦
+      </div>
 
       <div>
-        <div class="eyebrow">YOUR PERSONAL INTELLIGENCE</div>
+
+        <div class="eyebrow">
+          YOUR PERSONAL INTELLIGENCE
+        </div>
 
         <h1>
           Big ideas.<br>
-          <span>Infinite possibilities.</span>
+          <span>
+            Infinite possibilities.
+          </span>
         </h1>
 
         <p>
           Meet Neutron. Your thinking partner for anything.
         </p>
+
       </div>
 
     </div>
+
   </section>
+
+
+  <!-- STARTER CARDS -->
 
   <section class="grid">
 
-    <article class="card" onclick="starter('Make something new')">
-      <span class="card-icon">✦</span>
-      <span class="arrow">↗</span>
+    <article
+      class="card"
+      onclick="starter('Make something new')"
+    >
 
-      <h2>Make something new</h2>
+      <span class="card-icon">
+        ✦
+      </span>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+      <h2>
+        Make something new
+      </h2>
 
       <p>
         Turn a spark into your next big idea
       </p>
+
     </article>
 
-    <article class="card" onclick="starter('Build with me')">
-      <span class="card-icon">&lt;/&gt;</span>
-      <span class="arrow">↗</span>
 
-      <h2>Build with me</h2>
+    <article
+      class="card"
+      onclick="starter('Build with me')"
+    >
+
+      <span class="card-icon">
+        &lt;/&gt;
+      </span>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+      <h2>
+        Build with me
+      </h2>
 
       <p>
         From first line to final masterpiece
       </p>
+
     </article>
 
-    <article class="card" onclick="starter('Go down a rabbit hole')">
-      <span class="card-icon">▢</span>
-      <span class="arrow">↗</span>
 
-      <h2>Go down a rabbit hole</h2>
+    <article
+      class="card"
+      onclick="starter('Go down a rabbit hole')"
+    >
+
+      <span class="card-icon">
+        ▢
+      </span>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+      <h2>
+        Go down a rabbit hole
+      </h2>
 
       <p>
         Make the complex feel beautifully simple
       </p>
+
     </article>
 
-    <article class="card" onclick="starter('Find your next move')">
-      <span class="card-icon">◈</span>
-      <span class="arrow">↗</span>
 
-      <h2>Find your next move</h2>
+    <article
+      class="card"
+      onclick="starter('Find your next move')"
+    >
+
+      <span class="card-icon">
+        ◈
+      </span>
+
+      <span class="arrow">
+        ↗
+      </span>
+
+      <h2>
+        Find your next move
+      </h2>
 
       <p>
         A clearer plan. A better starting point.
       </p>
+
     </article>
 
   </section>
 
+
+  <!-- FEATURES -->
+
   <section class="features">
 
     <div>
-      <span class="feature-icon">✦</span>
+      <span class="feature-icon">
+        ✦
+      </span>
+
       A space for big thinking
     </div>
 
     <div>
-      <span class="feature-icon">&lt;/&gt;</span>
+      <span class="feature-icon">
+        &lt;/&gt;
+      </span>
+
       Built for your workflow
     </div>
 
     <div>
-      <span class="feature-icon">♢</span>
+      <span class="feature-icon">
+        ♢
+      </span>
+
       Local chat history
     </div>
 
   </section>
 
-  <section class="chat" id="chat"></section>
 
-  <form class="composer" onsubmit="sendMessage(event)">
+  <!-- CHAT -->
+
+  <section
+    class="chat"
+    id="chat"
+  ></section>
+
+
+  <!-- COMPOSER -->
+
+  <form
+    class="composer"
+    id="composer"
+  >
 
     <input
       id="prompt"
@@ -532,31 +1108,83 @@
       autocomplete="off"
     >
 
+
+    <!-- TOOLS POPUP -->
+
+    <div
+      class="tools-menu"
+      id="toolsMenu"
+    >
+
+      <button
+        class="tool-item"
+        id="calculatorTool"
+        type="button"
+      >
+        <span>🧮</span>
+        Calculator
+      </button>
+
+      <button
+        class="tool-item"
+        id="clearChatTool"
+        type="button"
+      >
+        <span>🗑</span>
+        Clear current chat
+      </button>
+
+      <button
+        class="tool-item"
+        id="focusTool"
+        type="button"
+      >
+        <span>✦</span>
+        Focus input
+      </button>
+
+    </div>
+
+
     <div class="controls">
 
       <button
         type="button"
-        onclick="document.getElementById('prompt').focus()"
+        id="plusBtn"
+        class="tool-button"
+        aria-label="Focus input"
       >
         ＋
       </button>
 
-      <span style="color:#2e2540">|</span>
+      <span style="color:#2e2540">
+        |
+      </span>
 
-      <button type="button">
-        ☷ &nbsp;Tools
-      </button>
 
       <button
         type="button"
-        onclick="alert('Voice input will be connected in the next step.')"
+        id="toolsBtn"
+        class="tool-button"
+      >
+        ☷ &nbsp;Tools
+      </button>
+
+
+      <button
+        type="button"
+        id="micBtn"
+        class="tool-button"
+        aria-label="Voice input"
       >
         ♩
       </button>
 
+
       <button
         class="send"
         type="submit"
+        aria-label="Send message"
       >
         ↑
       </button>
@@ -565,167 +1193,1093 @@
 
   </form>
 
+
   <div class="footer">
     Neutron is always here. Ask, explore, create.
   </div>
 
 </div>
 
+
 <script>
 
-const conversation = [];
+/* =====================================================
+   NEUTRON V2
+   Frontend only
+   api/chat.js is NOT modified
+===================================================== */
 
-/* Starter buttons */
 
-function starter(text){
-  document.getElementById('prompt').value = text;
-  document.getElementById('prompt').focus();
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const input =
+  document.getElementById('prompt');
+
+const chat =
+  document.getElementById('chat');
+
+const composer =
+  document.getElementById('composer');
+
+const menuBtn =
+  document.getElementById('menuBtn');
+
+const sidebar =
+  document.getElementById('sidebar');
+
+const sidebarOverlay =
+  document.getElementById('sidebarOverlay');
+
+const sidebarClose =
+  document.getElementById('sidebarClose');
+
+const newChatBtn =
+  document.getElementById('newChatBtn');
+
+const historyList =
+  document.getElementById('historyList');
+
+const toolsBtn =
+  document.getElementById('toolsBtn');
+
+const toolsMenu =
+  document.getElementById('toolsMenu');
+
+const calculatorTool =
+  document.getElementById('calculatorTool');
+
+const clearChatTool =
+  document.getElementById('clearChatTool');
+
+const focusTool =
+  document.getElementById('focusTool');
+
+const plusBtn =
+  document.getElementById('plusBtn');
+
+const micBtn =
+  document.getElementById('micBtn');
+
+const installBtn =
+  document.getElementById('installBtn');
+
+
+/* =====================================================
+   CHAT STATE
+===================================================== */
+
+let conversation = [];
+
+let chatHistory = [];
+
+let currentChatId =
+  'chat-' + Date.now();
+
+
+/* =====================================================
+   LOAD LOCAL DATA
+===================================================== */
+
+try{
+
+  const savedConversation =
+    localStorage.getItem(
+      'neutron_current_conversation'
+    );
+
+  if(savedConversation){
+
+    conversation =
+      JSON.parse(savedConversation);
+
+  }
+
+}catch(error){
+
+  conversation = [];
+
 }
 
-/* Chat */
+
+try{
+
+  const savedHistory =
+    localStorage.getItem(
+      'neutron_chat_history'
+    );
+
+  if(savedHistory){
+
+    chatHistory =
+      JSON.parse(savedHistory);
+
+  }
+
+}catch(error){
+
+  chatHistory = [];
+
+}
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveConversation(){
+
+  try{
+
+    localStorage.setItem(
+      'neutron_current_conversation',
+      JSON.stringify(conversation)
+    );
+
+  }catch(error){
+
+    console.log(
+      'Could not save conversation.'
+    );
+
+  }
+
+}
+
+
+function saveHistory(){
+
+  try{
+
+    localStorage.setItem(
+      'neutron_chat_history',
+      JSON.stringify(chatHistory)
+    );
+
+  }catch(error){
+
+    console.log(
+      'Could not save chat history.'
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   STARTER BUTTONS
+===================================================== */
+
+function starter(text){
+
+  input.value = text;
+
+  input.focus();
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function openSidebar(){
+
+  sidebar.classList.add('open');
+
+  sidebarOverlay.classList.add('open');
+
+  renderHistory();
+
+}
+
+
+function closeSidebar(){
+
+  sidebar.classList.remove('open');
+
+  sidebarOverlay.classList.remove('open');
+
+}
+
+
+menuBtn.addEventListener(
+  'click',
+  openSidebar
+);
+
+
+sidebarClose.addEventListener(
+  'click',
+  closeSidebar
+);
+
+
+sidebarOverlay.addEventListener(
+  'click',
+  closeSidebar
+);
+
+
+/* =====================================================
+   NEW CHAT
+===================================================== */
+
+newChatBtn.addEventListener(
+  'click',
+  () => {
+
+    conversation = [];
+
+    currentChatId =
+      'chat-' + Date.now();
+
+    chat.innerHTML = '';
+
+    chat.style.display = 'none';
+
+    input.value = '';
+
+    saveConversation();
+
+    closeSidebar();
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+    input.focus();
+
+  }
+);
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function saveCurrentChatToHistory(){
+
+  if(!conversation.length){
+
+    return;
+
+  }
+
+  const firstUserMessage =
+    conversation.find(
+      item => item.role === 'user'
+    );
+
+  if(!firstUserMessage){
+
+    return;
+
+  }
+
+  const title =
+    String(firstUserMessage.content)
+      .slice(0,38);
+
+  const existingIndex =
+    chatHistory.findIndex(
+      item => item.id === currentChatId
+    );
+
+  const item = {
+
+    id:currentChatId,
+
+    title:
+      title || 'New Chat',
+
+    messages:
+      conversation,
+
+    updatedAt:
+      Date.now()
+
+  };
+
+
+  if(existingIndex >= 0){
+
+    chatHistory[existingIndex] =
+      item;
+
+  }else{
+
+    chatHistory.unshift(item);
+
+  }
+
+
+  chatHistory =
+    chatHistory.slice(0,20);
+
+  saveHistory();
+
+  renderHistory();
+
+}
+
+
+function renderHistory(){
+
+  historyList.innerHTML = '';
+
+
+  if(!chatHistory.length){
+
+    const empty =
+      document.createElement('div');
+
+    empty.style.color =
+      '#625777';
+
+    empty.style.fontSize =
+      '13px';
+
+    empty.style.padding =
+      '10px 5px';
+
+    empty.textContent =
+      'No previous chats yet.';
+
+    historyList.appendChild(empty);
+
+    return;
+
+  }
+
+
+  chatHistory.forEach(item => {
+
+    const button =
+      document.createElement('button');
+
+    button.className =
+      'sidebar-chat';
+
+    button.type =
+      'button';
+
+
+    button.innerHTML =
+
+      '<span class="sidebar-chat-icon">💬</span>' +
+
+      '<span>' +
+      escapeHtml(item.title) +
+      '</span>';
+
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        loadChat(item);
+
+      }
+    );
+
+
+    historyList.appendChild(button);
+
+  });
+
+}
+
+
+function loadChat(item){
+
+  conversation =
+    Array.isArray(item.messages)
+      ? item.messages
+      : [];
+
+  currentChatId =
+    item.id;
+
+  chat.innerHTML = '';
+
+  chat.style.display =
+    conversation.length
+      ? 'block'
+      : 'none';
+
+
+  conversation.forEach(message => {
+
+    if(message.role === 'user'){
+
+      appendUserMessage(
+        message.content
+      );
+
+    }
+
+    if(message.role === 'assistant'){
+
+      appendBotMessage(
+        message.content
+      );
+
+    }
+
+  });
+
+
+  saveConversation();
+
+  closeSidebar();
+
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:'smooth'
+  });
+
+}
+
+
+/* =====================================================
+   MESSAGE UI
+===================================================== */
+
+function appendUserMessage(text){
+
+  chat.innerHTML +=
+    `<div class="message user">
+      ${escapeHtml(text)}
+    </div>`;
+
+}
+
+
+function appendBotMessage(text){
+
+  const id =
+    'bot-' + Date.now() +
+    '-' + Math.random()
+      .toString(36)
+      .slice(2);
+
+
+  chat.innerHTML +=
+
+    `<div class="message bot">
+
+      <b>Neutron</b><br>
+
+      ${escapeHtml(text)
+        .replace(/\n/g,'<br>')}
+
+      <div class="message-actions">
+
+        <button
+          class="copy-btn"
+          type="button"
+          onclick="copyMessage(this)"
+        >
+          Copy
+        </button>
+
+      </div>
+
+    </div>`;
+
+}
+
+
+function copyMessage(button){
+
+  const message =
+    button.closest('.message');
+
+  if(!message){
+
+    return;
+
+  }
+
+  const clone =
+    message.cloneNode(true);
+
+  const actions =
+    clone.querySelector(
+      '.message-actions'
+    );
+
+  if(actions){
+
+    actions.remove();
+
+  }
+
+  const text =
+    clone.innerText
+      .replace(/^Neutron\s*/,'')
+      .trim();
+
+
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+
+      button.textContent =
+        'Copied!';
+
+      setTimeout(() => {
+
+        button.textContent =
+          'Copy';
+
+      },1200);
+
+    })
+    .catch(() => {
+
+      button.textContent =
+        'Copy failed';
+
+    });
+
+}
+
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
 
 async function sendMessage(e){
 
   e.preventDefault();
 
-  const input = document.getElementById('prompt');
-  const text = input.value.trim();
+  const text =
+    input.value.trim();
 
-  if(!text) return;
 
-  const chat = document.getElementById('chat');
+  if(!text){
 
-  chat.style.display = 'block';
+    return;
 
-  chat.innerHTML +=
-    `<div class="message user">${escapeHtml(text)}</div>`;
+  }
+
+
+  chat.style.display =
+    'block';
+
+
+  appendUserMessage(text);
+
 
   input.value = '';
 
+
   conversation.push({
-    role: 'user',
-    content: text
+
+    role:'user',
+
+    content:text
+
   });
+
+
+  saveConversation();
+
 
   const loadingId =
-    'neutron-loading-' + Date.now();
+    'neutron-loading-' +
+    Date.now();
+
 
   chat.innerHTML +=
-    `<div class="message bot" id="${loadingId}">
+
+    `<div
+      class="message bot"
+      id="${loadingId}"
+    >
+
       <b>Neutron</b><br>
+
       Thinking…
+
     </div>`;
 
+
   window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: 'smooth'
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      'smooth'
+
   });
 
-  try {
 
-    const response = await fetch('/api/chat', {
+  try{
 
-      method: 'POST',
+    const response =
+      await fetch('/api/chat',{
 
-      headers: {
-        'Content-Type': 'application/json'
-      },
+        method:'POST',
 
-      body: JSON.stringify({
-        message: text,
-        history: conversation.slice(-20)
-      })
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
 
-    });
+        body:JSON.stringify({
 
-    const data = await response.json();
+          message:text,
+
+          history:
+            conversation.slice(-20)
+
+        })
+
+      });
+
+
+    const data =
+      await response.json();
+
 
     if(!response.ok){
+
       throw new Error(
-        data.error || 'Neutron could not respond.'
+        data.error ||
+        'Neutron could not respond.'
       );
+
     }
+
 
     const reply =
       typeof data.reply === 'string'
+
         ? data.reply
+
         : 'Neutron returned an empty response.';
 
+
     conversation.push({
-      role: 'assistant',
-      content: reply
+
+      role:'assistant',
+
+      content:reply
+
     });
 
+
+    saveConversation();
+
+
     const loading =
-      document.getElementById(loadingId);
+      document.getElementById(
+        loadingId
+      );
+
 
     if(loading){
 
-      loading.innerHTML =
-        `<b>Neutron</b><br>` +
-        escapeHtml(reply).replace(/\n/g, "<br>");
+      loading.outerHTML =
+
+        `<div class="message bot">
+
+          <b>Neutron</b><br>
+
+          ${escapeHtml(reply)
+            .replace(/\n/g,'<br>')}
+
+          <div class="message-actions">
+
+            <button
+              class="copy-btn"
+              type="button"
+              onclick="copyMessage(this)"
+            >
+              Copy
+            </button>
+
+          </div>
+
+        </div>`;
 
     }
 
-  } catch(error){
+
+    saveCurrentChatToHistory();
+
+
+  }catch(error){
 
     const loading =
-      document.getElementById(loadingId);
+      document.getElementById(
+        loadingId
+      );
+
 
     const message =
-      error && error.message
+      error &&
+      error.message
+
         ? error.message
+
         : 'Something went wrong.';
+
 
     if(loading){
 
       loading.innerHTML =
+
         `<b>Neutron</b><br>
-        Sorry, I couldn't connect right now.<br>
-        <small>${escapeHtml(message)}</small>`;
+
+        Sorry, I couldn't connect right now.
+
+        <br>
+
+        <small>
+          ${escapeHtml(message)}
+        </small>`;
 
     }
 
   }
 
+
   window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: 'smooth'
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      'smooth'
+
   });
 
 }
 
-/* HTML safety */
 
-function escapeHtml(s){
+composer.addEventListener(
+  'submit',
+  sendMessage
+);
 
-  return String(s).replace(/[&<>"']/g, m => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#039;'
-  }[m]));
 
-}
+/* =====================================================
+   TOOLS
+===================================================== */
 
-/* PWA installation */
+toolsBtn.addEventListener(
+  'click',
+  () => {
 
-let deferredPrompt = null;
-
-const installBtn =
-  document.getElementById('installBtn');
-
-window.addEventListener(
-  'beforeinstallprompt',
-  (event) => {
-
-    event.preventDefault();
-
-    deferredPrompt = event;
+    toolsMenu.classList.toggle(
+      'open'
+    );
 
   }
 );
+
+
+plusBtn.addEventListener(
+  'click',
+  () => {
+
+    input.focus();
+
+  }
+);
+
+
+/* Calculator */
+
+calculatorTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+
+    const expression =
+      prompt(
+        'Enter a calculation, for example: 25 * 8'
+      );
+
+
+    if(!expression){
+
+      return;
+
+    }
+
+
+    try{
+
+      /*
+       Simple calculator.
+       Only mathematical characters
+       are accepted.
+      */
+
+      if(
+        !/^[0-9+\-*/().%\s]+$/
+          .test(expression)
+      ){
+
+        throw new Error(
+          'Invalid calculation.'
+        );
+
+      }
+
+
+      const result =
+        Function(
+          '"use strict"; return (' +
+          expression +
+          ')'
+        )();
+
+
+      input.value =
+        String(result);
+
+      input.focus();
+
+
+    }catch(error){
+
+      alert(
+        'That calculation is not valid.'
+      );
+
+    }
+
+  }
+);
+
+
+/* Clear chat */
+
+clearChatTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+
+    conversation = [];
+
+    chat.innerHTML = '';
+
+    chat.style.display =
+      'none';
+
+    input.value = '';
+
+    saveConversation();
+
+    input.focus();
+
+  }
+);
+
+
+/* Focus */
+
+focusTool.addEventListener(
+  'click',
+  () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+    input.focus();
+
+  }
+);
+
+
+/* Close tools when tapping outside */
+
+document.addEventListener(
+  'click',
+  event => {
+
+    if(
+      !toolsMenu.contains(event.target) &&
+      !toolsBtn.contains(event.target)
+    ){
+
+      toolsMenu.classList.remove(
+        'open'
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+let recognition = null;
+
+let listening = false;
+
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+
+if(SpeechRecognition){
+
+  recognition =
+    new SpeechRecognition();
+
+
+  recognition.lang =
+    'en-IN';
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart = () => {
+
+    listening = true;
+
+    micBtn.classList.add(
+      'mic-active'
+    );
+
+    micBtn.textContent =
+      '●';
+
+  };
+
+
+  recognition.onresult =
+    event => {
+
+      const transcript =
+        event.results[0][0]
+          .transcript;
+
+      input.value =
+        transcript;
+
+      input.focus();
+
+    };
+
+
+  recognition.onerror =
+    event => {
+
+    console.log(
+      'Microphone error:',
+      event.error
+    );
+
+  };
+
+
+  recognition.onend = () => {
+
+    listening = false;
+
+    micBtn.classList.remove(
+      'mic-active'
+    );
+
+    micBtn.textContent =
+      '♩';
+
+  };
+
+
+  micBtn.addEventListener(
+    'click',
+    () => {
+
+      if(listening){
+
+        recognition.stop();
+
+        return;
+
+      }
+
+
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        console.log(
+          'Microphone could not start.'
+        );
+
+      }
+
+    }
+  );
+
+
+}else{
+
+  micBtn.addEventListener(
+    'click',
+    () => {
+
+      alert(
+        'Voice input is not supported by this browser.'
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   PWA INSTALL
+===================================================== */
+
+let deferredPrompt = null;
+
+
+window.addEventListener(
+  'beforeinstallprompt',
+  event => {
+
+    event.preventDefault();
+
+    deferredPrompt =
+      event;
+
+  }
+);
+
 
 installBtn.addEventListener(
   'click',
@@ -741,18 +2295,27 @@ installBtn.addEventListener(
 
     }
 
+
     deferredPrompt.prompt();
+
 
     await deferredPrompt.userChoice;
 
-    deferredPrompt = null;
+
+    deferredPrompt =
+      null;
 
   }
 );
 
-/* Register the service worker */
 
-if('serviceWorker' in navigator){
+/* =====================================================
+   SERVICE WORKER
+===================================================== */
+
+if(
+  'serviceWorker' in navigator
+){
 
   window.addEventListener(
     'load',
@@ -761,16 +2324,91 @@ if('serviceWorker' in navigator){
       navigator.serviceWorker
         .register('/sw.js')
         .catch(error => {
+
           console.log(
             'Neutron service worker registration failed:',
             error
           );
+
         });
 
     }
   );
 
 }
+
+
+/* =====================================================
+   HTML SAFETY
+===================================================== */
+
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m => ({
+
+      '&':'&amp;',
+
+      '<':'&lt;',
+
+      '>':'&gt;',
+
+      '"':'&quot;',
+
+      "'":'&#039;'
+
+    }[m])
+  );
+
+}
+
+
+/* =====================================================
+   RESTORE CURRENT CHAT
+===================================================== */
+
+if(conversation.length){
+
+  chat.style.display =
+    'block';
+
+
+  conversation.forEach(
+    message => {
+
+      if(
+        message.role === 'user'
+      ){
+
+        appendUserMessage(
+          message.content
+        );
+
+      }
+
+
+      if(
+        message.role === 'assistant'
+      ){
+
+        appendBotMessage(
+          message.content
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   INITIALIZE HISTORY
+===================================================== */
+
+renderHistory();
 
 </script>
 
