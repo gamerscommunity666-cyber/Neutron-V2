@@ -1,50 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<meta
-  name="theme-color"
-  content="#07050f"
->
-
-<meta
-  name="mobile-web-app-capable"
-  content="yes"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07050f">
+<meta name="mobile-web-app-capable" content="yes">
 
 <link rel="manifest" href="/manifest.json">
-
-<link
-  rel="apple-touch-icon"
-  href="/icon-192.png"
->
+<link rel="apple-touch-icon" href="/icon-192.png">
 
 <title>Neutron V2</title>
 
 <style>
+*{box-sizing:border-box}
 
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#07050f;
   color:#f5f1ff;
 }
@@ -55,37 +28,20 @@ body{
   overflow-x:hidden;
 }
 
-button,
-input{
-  font:inherit;
-}
-
-button{
-  -webkit-tap-highlight-color:transparent;
-}
+button,input{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
 
 .app{
   width:min(100%,1100px);
   min-height:100vh;
   padding:18px 18px 30px;
-
   background:
-    radial-gradient(
-      circle at 75% 12%,
-      rgba(139,64,255,.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 15% 55%,
-      rgba(112,55,210,.08),
-      transparent 30%
-    ),
+    radial-gradient(circle at 75% 12%,rgba(139,64,255,.12),transparent 28%),
+    radial-gradient(circle at 15% 55%,rgba(112,55,210,.08),transparent 30%),
     #07050f;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header{
   height:72px;
@@ -105,9 +61,7 @@ header{
   border-radius:12px;
 }
 
-.icon-btn:active{
-  background:#181024;
-}
+.icon-btn:active{background:#181024}
 
 .brand{
   display:flex;
@@ -126,8 +80,7 @@ header{
   place-items:center;
   color:#b983ff;
   font-size:28px;
-  box-shadow:
-    0 0 25px rgba(157,92,255,.3);
+  box-shadow:0 0 25px rgba(157,92,255,.3);
   flex:none;
 }
 
@@ -145,25 +98,15 @@ header{
   padding:6px 12px;
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero{
   border:1px solid #422078;
   border-radius:28px;
   padding:34px;
   margin-top:12px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(26,14,53,.78),
-      rgba(9,7,19,.9)
-    );
-
-  box-shadow:
-    inset 0 0 50px rgba(125,55,230,.05);
+  background:linear-gradient(135deg,rgba(26,14,53,.78),rgba(9,7,19,.9));
+  box-shadow:inset 0 0 50px rgba(125,55,230,.05);
 }
 
 .hero-top{
@@ -182,10 +125,7 @@ header{
   border:1px solid #6331a0;
   color:#bf8cff;
   font-size:50px;
-
-  box-shadow:
-    0 0 45px rgba(145,69,255,.2);
-
+  box-shadow:0 0 45px rgba(145,69,255,.2);
   flex:none;
 }
 
@@ -209,9 +149,7 @@ h1{
   overflow-wrap:anywhere;
 }
 
-h1 span{
-  color:#b16dff;
-}
+h1 span{color:#b16dff}
 
 .hero p{
   color:#9387ae;
@@ -221,9 +159,7 @@ h1 span{
   max-width:650px;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS */
 
 .grid{
   display:grid;
@@ -237,14 +173,7 @@ h1 span{
   border:1px solid #3a2164;
   border-radius:25px;
   padding:26px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(22,14,43,.95),
-      rgba(9,7,19,.95)
-    );
-
+  background:linear-gradient(145deg,rgba(22,14,43,.95),rgba(9,7,19,.95));
   cursor:pointer;
   transition:.2s;
   overflow:hidden;
@@ -255,9 +184,7 @@ h1 span{
   border-color:#7e43c5;
 }
 
-.card:active{
-  transform:scale(.99);
-}
+.card:active{transform:scale(.99)}
 
 .card-icon{
   font-size:34px;
@@ -284,9 +211,7 @@ h1 span{
   overflow-wrap:anywhere;
 }
 
-/* =========================
-   FEATURES
-========================= */
+/* FEATURES */
 
 .features{
   display:grid;
@@ -308,9 +233,7 @@ h1 span{
   font-size:20px;
 }
 
-/* =========================
-   CHAT
-========================= */
+/* CHAT */
 
 .chat{
   display:none;
@@ -354,29 +277,16 @@ h1 span{
   cursor:pointer;
 }
 
-.copy-btn:active{
-  transform:scale(.97);
-}
+.copy-btn:active{transform:scale(.97)}
 
-/* =========================
-   COMPOSER
-========================= */
+/* COMPOSER */
 
 .composer{
   border:1px solid #8b45e6;
   border-radius:28px;
   padding:20px 20px 14px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(24,13,47,.98),
-      rgba(9,7,19,.98)
-    );
-
-  box-shadow:
-    0 0 35px rgba(123,49,225,.12);
-
+  background:linear-gradient(145deg,rgba(24,13,47,.98),rgba(9,7,19,.98));
+  box-shadow:0 0 35px rgba(123,49,225,.12);
   position:relative;
 }
 
@@ -390,9 +300,7 @@ h1 span{
   padding:5px 2px 25px;
 }
 
-.input::placeholder{
-  color:#766a91;
-}
+.input::placeholder{color:#766a91}
 
 .controls{
   display:flex;
@@ -412,14 +320,11 @@ h1 span{
   border-radius:10px;
 }
 
-.tool-button:hover{
-  background:#191027;
-}
+.tool-button:hover{background:#191027}
 
 .mic-active{
   color:#d19cff!important;
-  text-shadow:
-    0 0 12px rgba(177,109,255,.7);
+  text-shadow:0 0 12px rgba(177,109,255,.7);
 }
 
 .send{
@@ -430,40 +335,24 @@ h1 span{
   background:#a65cff!important;
   color:white!important;
   font-size:27px;
-  box-shadow:
-    0 0 22px rgba(166,92,255,.3);
+  box-shadow:0 0 22px rgba(166,92,255,.3);
 }
 
-/* =========================
-   TOOLS MENU
-========================= */
+/* TOOLS MENU */
 
 .tools-menu{
   position:absolute;
   left:18px;
   bottom:82px;
-
   width:220px;
-
   border:1px solid #4a2675;
   border-radius:17px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(27,15,52,.98),
-      rgba(10,7,20,.99)
-    );
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,.45);
-
+  background:linear-gradient(145deg,rgba(27,15,52,.98),rgba(10,7,20,.99));
+  box-shadow:0 15px 40px rgba(0,0,0,.45);
   padding:8px;
-
   opacity:0;
   transform:translateY(8px);
   pointer-events:none;
-
   transition:.2s;
   z-index:30;
 }
@@ -485,31 +374,23 @@ h1 span{
   cursor:pointer;
 }
 
-.tool-item:hover{
-  background:#1d1230;
-}
+.tool-item:hover{background:#1d1230}
 
 .tool-item span{
   color:#b16dff;
   margin-right:9px;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+/* SIDEBAR */
 
 .sidebar-overlay{
   position:fixed;
   inset:0;
-
   background:rgba(0,0,0,.58);
   backdrop-filter:blur(3px);
-
   opacity:0;
   pointer-events:none;
-
   transition:.25s;
-
   z-index:90;
 }
 
@@ -522,37 +403,21 @@ h1 span{
   position:fixed;
   top:0;
   left:0;
-
   width:310px;
   max-width:86vw;
   height:100vh;
-
-  background:
-    linear-gradient(
-      160deg,
-      rgba(25,13,48,.99),
-      rgba(7,5,15,.99)
-    );
-
+  background:linear-gradient(160deg,rgba(25,13,48,.99),rgba(7,5,15,.99));
   border-right:1px solid #422078;
-
-  box-shadow:
-    10px 0 45px rgba(0,0,0,.5);
-
+  box-shadow:10px 0 45px rgba(0,0,0,.5);
   transform:translateX(-105%);
   transition:.3s ease;
-
   z-index:100;
-
   padding:20px;
-
   display:flex;
   flex-direction:column;
 }
 
-.sidebar.open{
-  transform:translateX(0);
-}
+.sidebar.open{transform:translateX(0)}
 
 .sidebar-header{
   display:flex;
@@ -572,47 +437,28 @@ h1 span{
   color:#a970ff;
   font-size:30px;
   cursor:pointer;
-
   width:42px;
   height:42px;
   border-radius:12px;
 }
 
-.sidebar-close:active{
-  background:#181024;
-}
+.sidebar-close:active{background:#181024}
 
 .new-chat{
   width:100%;
-
   border:1px solid #8b45e6;
   border-radius:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8f4de0,
-      #a65cff
-    );
-
+  background:linear-gradient(135deg,#8f4de0,#a65cff);
   color:white;
-
   padding:14px 16px;
-
   font-size:16px;
   font-weight:650;
-
   cursor:pointer;
-
-  box-shadow:
-    0 0 20px rgba(166,92,255,.2);
-
+  box-shadow:0 0 20px rgba(166,92,255,.2);
   margin-bottom:25px;
 }
 
-.new-chat:active{
-  transform:scale(.98);
-}
+.new-chat:active{transform:scale(.98)}
 
 .sidebar-section{
   color:#766a91;
@@ -633,18 +479,12 @@ h1 span{
   display:flex;
   align-items:center;
   gap:12px;
-
   width:100%;
-
   border:1px solid #2c194d;
   border-radius:14px;
-
   background:#120c20;
-
   color:#d9cff0;
-
   padding:13px;
-
   text-align:left;
   cursor:pointer;
 }
@@ -667,9 +507,7 @@ h1 span{
   padding-top:20px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 .footer{
   text-align:center;
@@ -678,9 +516,7 @@ h1 span{
   margin-top:25px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -694,9 +530,7 @@ h1 span{
     gap:8px;
   }
 
-  .brand{
-    gap:9px;
-  }
+  .brand{gap:9px}
 
   .brand-name{
     font-size:27px;
@@ -719,9 +553,7 @@ h1 span{
     border-radius:22px;
   }
 
-  .hero-top{
-    display:block;
-  }
+  .hero-top{display:block}
 
   .spark{
     width:68px;
@@ -742,9 +574,7 @@ h1 span{
     letter-spacing:-1.5px;
   }
 
-  .hero p{
-    font-size:15px;
-  }
+  .hero p{font-size:15px}
 
   .grid{
     grid-template-columns:1fr;
@@ -784,13 +614,9 @@ h1 span{
     padding-bottom:20px;
   }
 
-  .controls{
-    gap:10px;
-  }
+  .controls{gap:10px}
 
-  .controls button{
-    font-size:14px;
-  }
+  .controls button{font-size:14px}
 
   .send{
     width:50px;
@@ -804,58 +630,30 @@ h1 span{
     width:210px;
   }
 
-  .message{
-    max-width:92%;
-  }
-
+  .message{max-width:92%}
 }
 
-/* Prevent weird horizontal overflow */
-
-*{
-  max-width:100%;
-}
-
+*{max-width:100%}
 </style>
-
 </head>
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<div
-  class="sidebar-overlay"
-  id="sidebarOverlay"
-></div>
-
-<aside
-  class="sidebar"
-  id="sidebar"
->
+<aside class="sidebar" id="sidebar">
 
   <div class="sidebar-header">
-
-    <div class="sidebar-title">
-      Neutron
-    </div>
+    <div class="sidebar-title">Neutron</div>
 
     <button
       class="sidebar-close"
       id="sidebarClose"
       aria-label="Close sidebar"
-    >
-      ×
-    </button>
-
+    >×</button>
   </div>
 
-  <button
-    class="new-chat"
-    id="newChatBtn"
-  >
+  <button class="new-chat" id="newChatBtn">
     ＋ &nbsp; New Chat
   </button>
 
@@ -863,10 +661,7 @@ h1 span{
     Conversations
   </div>
 
-  <div
-    class="history-list"
-    id="historyList"
-  ></div>
+  <div class="history-list" id="historyList"></div>
 
   <div class="sidebar-bottom">
     Neutron V2<br>
@@ -875,343 +670,254 @@ h1 span{
 
 </aside>
 
-
-<!-- =========================
-     MAIN APP
-========================= -->
-
 <div class="app">
 
-  <header>
+<header>
 
-    <button
-      class="icon-btn"
-      id="menuBtn"
-      aria-label="Open menu"
-    >
-      ☰
-    </button>
+  <button
+    class="icon-btn"
+    id="menuBtn"
+    aria-label="Open menu"
+  >☰</button>
 
-    <div class="brand">
+  <div class="brand">
 
-      <div class="atom">
-        ⚛
-      </div>
+    <div class="atom">⚛</div>
 
-      <div class="brand-name">
-        Neutron
-      </div>
-
-      <div class="badge">
-        V2
-      </div>
-
+    <div class="brand-name">
+      Neutron
     </div>
 
-    <button
-      class="icon-btn"
-      id="installBtn"
-      aria-label="Install Neutron"
-    >
-      ⇩
-    </button>
-
-  </header>
-
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="hero-top">
-
-      <div class="spark">
-        ✦
-      </div>
-
-      <div>
-
-        <div class="eyebrow">
-          YOUR PERSONAL INTELLIGENCE
-        </div>
-
-        <h1>
-          Big ideas.<br>
-          <span>
-            Infinite possibilities.
-          </span>
-        </h1>
-
-        <p>
-          Meet Neutron. Your thinking partner for anything.
-        </p>
-
-      </div>
-
+    <div class="badge">
+      V2
     </div>
 
-  </section>
-
-
-  <!-- STARTER CARDS -->
-
-  <section class="grid">
-
-    <article
-      class="card"
-      onclick="starter('Make something new')"
-    >
-
-      <span class="card-icon">
-        ✦
-      </span>
-
-      <span class="arrow">
-        ↗
-      </span>
-
-      <h2>
-        Make something new
-      </h2>
-
-      <p>
-        Turn a spark into your next big idea
-      </p>
-
-    </article>
-
-
-    <article
-      class="card"
-      onclick="starter('Build with me')"
-    >
-
-      <span class="card-icon">
-        &lt;/&gt;
-      </span>
-
-      <span class="arrow">
-        ↗
-      </span>
-
-      <h2>
-        Build with me
-      </h2>
-
-      <p>
-        From first line to final masterpiece
-      </p>
-
-    </article>
-
-
-    <article
-      class="card"
-      onclick="starter('Go down a rabbit hole')"
-    >
-
-      <span class="card-icon">
-        ▢
-      </span>
-
-      <span class="arrow">
-        ↗
-      </span>
-
-      <h2>
-        Go down a rabbit hole
-      </h2>
-
-      <p>
-        Make the complex feel beautifully simple
-      </p>
-
-    </article>
-
-
-    <article
-      class="card"
-      onclick="starter('Find your next move')"
-    >
-
-      <span class="card-icon">
-        ◈
-      </span>
-
-      <span class="arrow">
-        ↗
-      </span>
-
-      <h2>
-        Find your next move
-      </h2>
-
-      <p>
-        A clearer plan. A better starting point.
-      </p>
-
-    </article>
-
-  </section>
-
-
-  <!-- FEATURES -->
-
-  <section class="features">
-
-    <div>
-      <span class="feature-icon">
-        ✦
-      </span>
-
-      A space for big thinking
-    </div>
-
-    <div>
-      <span class="feature-icon">
-        &lt;/&gt;
-      </span>
-
-      Built for your workflow
-    </div>
-
-    <div>
-      <span class="feature-icon">
-        ♢
-      </span>
-
-      Local chat history
-    </div>
-
-  </section>
-
-
-  <!-- CHAT -->
-
-  <section
-    class="chat"
-    id="chat"
-  ></section>
-
-
-  <!-- COMPOSER -->
-
-  <form
-    class="composer"
-    id="composer"
-  >
-
-    <input
-      id="prompt"
-      class="input"
-      placeholder="Ask Neutron anything..."
-      autocomplete="off"
-    >
-
-
-    <!-- TOOLS POPUP -->
-
-    <div
-      class="tools-menu"
-      id="toolsMenu"
-    >
-
-      <button
-        class="tool-item"
-        id="calculatorTool"
-        type="button"
-      >
-        <span>🧮</span>
-        Calculator
-      </button>
-
-      <button
-        class="tool-item"
-        id="clearChatTool"
-        type="button"
-      >
-        <span>🗑</span>
-        Clear current chat
-      </button>
-
-      <button
-        class="tool-item"
-        id="focusTool"
-        type="button"
-      >
-        <span>✦</span>
-        Focus input
-      </button>
-
-    </div>
-
-
-    <div class="controls">
-
-      <button
-        type="button"
-        id="plusBtn"
-        class="tool-button"
-        aria-label="Focus input"
-      >
-        ＋
-      </button>
-
-      <span style="color:#2e2540">
-        |
-      </span>
-
-
-      <button
-        type="button"
-        id="toolsBtn"
-        class="tool-button"
-      >
-        ☷ &nbsp;Tools
-      </button>
-
-
-      <button
-        type="button"
-        id="micBtn"
-        class="tool-button"
-        aria-label="Voice input"
-      >
-        ♩
-      </button>
-
-
-      <button
-        class="send"
-        type="submit"
-        aria-label="Send message"
-      >
-        ↑
-      </button>
-
-    </div>
-
-  </form>
-
-
-  <div class="footer">
-    Neutron is always here. Ask, explore, create.
   </div>
 
+  <button
+    class="icon-btn"
+    id="installBtn"
+    aria-label="Install Neutron"
+  >⇩</button>
+
+</header>
+
+<section class="hero">
+
+  <div class="hero-top">
+
+    <div class="spark">
+      ✦
+    </div>
+
+    <div>
+
+      <div class="eyebrow">
+        YOUR PERSONAL INTELLIGENCE
+      </div>
+
+      <h1>
+        Big ideas.<br>
+        <span>Infinite possibilities.</span>
+      </h1>
+
+      <p>
+        Meet Neutron. Your thinking partner for anything.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="grid">
+
+  <article
+    class="card"
+    onclick="starter('Make something new')"
+  >
+
+    <span class="card-icon">✦</span>
+
+    <span class="arrow">↗</span>
+
+    <h2>Make something new</h2>
+
+    <p>
+      Turn a spark into your next big idea
+    </p>
+
+  </article>
+
+  <article
+    class="card"
+    onclick="starter('Build with me')"
+  >
+
+    <span class="card-icon">&lt;/&gt;</span>
+
+    <span class="arrow">↗</span>
+
+    <h2>Build with me</h2>
+
+    <p>
+      From first line to final masterpiece
+    </p>
+
+  </article>
+
+  <article
+    class="card"
+    onclick="starter('Go down a rabbit hole')"
+  >
+
+    <span class="card-icon">▢</span>
+
+    <span class="arrow">↗</span>
+
+    <h2>Go down a rabbit hole</h2>
+
+    <p>
+      Make the complex feel beautifully simple
+    </p>
+
+  </article>
+
+  <article
+    class="card"
+    onclick="starter('Find your next move')"
+  >
+
+    <span class="card-icon">◈</span>
+
+    <span class="arrow">↗</span>
+
+    <h2>Find your next move</h2>
+
+    <p>
+      A clearer plan. A better starting point.
+    </p>
+
+  </article>
+
+</section>
+
+<section class="features">
+
+  <div>
+    <span class="feature-icon">✦</span>
+    A space for big thinking
+  </div>
+
+  <div>
+    <span class="feature-icon">&lt;/&gt;</span>
+    Built for your workflow
+  </div>
+
+  <div>
+    <span class="feature-icon">♢</span>
+    Local chat history
+  </div>
+
+</section>
+
+<section class="chat" id="chat"></section>
+
+<form class="composer" id="composer">
+
+  <input
+    id="prompt"
+    class="input"
+    placeholder="Ask Neutron anything..."
+    autocomplete="off"
+  >
+
+  <div class="tools-menu" id="toolsMenu">
+
+    <!-- WEB SEARCH -->
+    <button
+      class="tool-item"
+      id="webSearchTool"
+      type="button"
+    >
+      <span>🌐</span>
+      Web Search
+    </button>
+
+    <button
+      class="tool-item"
+      id="calculatorTool"
+      type="button"
+    >
+      <span>🧮</span>
+      Calculator
+    </button>
+
+    <button
+      class="tool-item"
+      id="clearChatTool"
+      type="button"
+    >
+      <span>🗑</span>
+      Clear current chat
+    </button>
+
+    <button
+      class="tool-item"
+      id="focusTool"
+      type="button"
+    >
+      <span>✦</span>
+      Focus input
+    </button>
+
+  </div>
+
+  <div class="controls">
+
+    <button
+      type="button"
+      id="plusBtn"
+      class="tool-button"
+      aria-label="Focus input"
+    >＋</button>
+
+    <span style="color:#2e2540">|</span>
+
+    <button
+      type="button"
+      id="toolsBtn"
+      class="tool-button"
+    >☷ &nbsp;Tools</button>
+
+    <button
+      type="button"
+      id="micBtn"
+      class="tool-button"
+      aria-label="Voice input"
+    >♩</button>
+
+    <button
+      class="send"
+      type="submit"
+      aria-label="Send message"
+    >↑</button>
+
+  </div>
+
+</form>
+
+<div class="footer">
+  Neutron is always here. Ask, explore, create.
 </div>
 
+</div>
 
 <script>
 
 /* =====================================================
    NEUTRON V2
-   Frontend only
-   api/chat.js is NOT modified
-===================================================== */
-
-
-/* =====================================================
-   ELEMENTS
 ===================================================== */
 
 const input =
@@ -1247,6 +953,9 @@ const toolsBtn =
 const toolsMenu =
   document.getElementById('toolsMenu');
 
+const webSearchTool =
+  document.getElementById('webSearchTool');
+
 const calculatorTool =
   document.getElementById('calculatorTool');
 
@@ -1266,9 +975,7 @@ const installBtn =
   document.getElementById('installBtn');
 
 
-/* =====================================================
-   CHAT STATE
-===================================================== */
+/* CHAT STATE */
 
 let conversation = [];
 
@@ -1278,9 +985,7 @@ let currentChatId =
   'chat-' + Date.now();
 
 
-/* =====================================================
-   LOAD LOCAL DATA
-===================================================== */
+/* LOAD CURRENT CONVERSATION */
 
 try{
 
@@ -1290,10 +995,8 @@ try{
     );
 
   if(savedConversation){
-
     conversation =
       JSON.parse(savedConversation);
-
   }
 
 }catch(error){
@@ -1303,6 +1006,8 @@ try{
 }
 
 
+/* LOAD HISTORY */
+
 try{
 
   const savedHistory =
@@ -1311,10 +1016,8 @@ try{
     );
 
   if(savedHistory){
-
     chatHistory =
       JSON.parse(savedHistory);
-
   }
 
 }catch(error){
@@ -1324,9 +1027,7 @@ try{
 }
 
 
-/* =====================================================
-   SAVE DATA
-===================================================== */
+/* SAVE */
 
 function saveConversation(){
 
@@ -1368,9 +1069,7 @@ function saveHistory(){
 }
 
 
-/* =====================================================
-   STARTER BUTTONS
-===================================================== */
+/* STARTER */
 
 function starter(text){
 
@@ -1381,9 +1080,7 @@ function starter(text){
 }
 
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* SIDEBAR */
 
 function openSidebar(){
 
@@ -1423,9 +1120,7 @@ sidebarOverlay.addEventListener(
 );
 
 
-/* =====================================================
-   NEW CHAT
-===================================================== */
+/* NEW CHAT */
 
 newChatBtn.addEventListener(
   'click',
@@ -1457,16 +1152,12 @@ newChatBtn.addEventListener(
 );
 
 
-/* =====================================================
-   HISTORY
-===================================================== */
+/* HISTORY */
 
 function saveCurrentChatToHistory(){
 
   if(!conversation.length){
-
     return;
-
   }
 
   const firstUserMessage =
@@ -1475,9 +1166,7 @@ function saveCurrentChatToHistory(){
     );
 
   if(!firstUserMessage){
-
     return;
-
   }
 
   const title =
@@ -1569,9 +1258,7 @@ function renderHistory(){
 
 
     button.innerHTML =
-
       '<span class="sidebar-chat-icon">💬</span>' +
-
       '<span>' +
       escapeHtml(item.title) +
       '</span>';
@@ -1645,9 +1332,7 @@ function loadChat(item){
 }
 
 
-/* =====================================================
-   MESSAGE UI
-===================================================== */
+/* MESSAGE UI */
 
 function appendUserMessage(text){
 
@@ -1660,13 +1345,6 @@ function appendUserMessage(text){
 
 
 function appendBotMessage(text){
-
-  const id =
-    'bot-' + Date.now() +
-    '-' + Math.random()
-      .toString(36)
-      .slice(2);
-
 
   chat.innerHTML +=
 
@@ -1700,9 +1378,7 @@ function copyMessage(button){
     button.closest('.message');
 
   if(!message){
-
     return;
-
   }
 
   const clone =
@@ -1714,9 +1390,7 @@ function copyMessage(button){
     );
 
   if(actions){
-
     actions.remove();
-
   }
 
   const text =
@@ -1750,9 +1424,7 @@ function copyMessage(button){
 }
 
 
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
+/* SEND MESSAGE */
 
 async function sendMessage(e){
 
@@ -1763,9 +1435,7 @@ async function sendMessage(e){
 
 
   if(!text){
-
     return;
-
   }
 
 
@@ -1861,9 +1531,7 @@ async function sendMessage(e){
 
     const reply =
       typeof data.reply === 'string'
-
         ? data.reply
-
         : 'Neutron returned an empty response.';
 
 
@@ -1927,9 +1595,7 @@ async function sendMessage(e){
     const message =
       error &&
       error.message
-
         ? error.message
-
         : 'Something went wrong.';
 
 
@@ -1971,9 +1637,7 @@ composer.addEventListener(
 );
 
 
-/* =====================================================
-   TOOLS
-===================================================== */
+/* TOOLS */
 
 toolsBtn.addEventListener(
   'click',
@@ -1997,7 +1661,291 @@ plusBtn.addEventListener(
 );
 
 
-/* Calculator */
+/* =====================================================
+   WEB SEARCH
+   MANUAL / ON-DEMAND TAVILY SEARCH
+   Uses /api/search
+===================================================== */
+
+webSearchTool.addEventListener(
+  'click',
+  async () => {
+
+    toolsMenu.classList.remove(
+      'open'
+    );
+
+
+    const query =
+      window.prompt(
+        'What do you want Neutron to search for?'
+      );
+
+
+    if(
+      !query ||
+      !query.trim()
+    ){
+
+      return;
+
+    }
+
+
+    const cleanQuery =
+      query.trim();
+
+
+    chat.style.display =
+      'block';
+
+
+    const loadingId =
+      'search-loading-' +
+      Date.now();
+
+
+    chat.innerHTML +=
+
+      `<div
+        class="message bot"
+        id="${loadingId}"
+      >
+
+        <b>Neutron Web Search</b><br>
+
+        Searching the web for:
+
+        <br>
+
+        <small>
+          ${escapeHtml(cleanQuery)}
+        </small>
+
+      </div>`;
+
+
+    window.scrollTo({
+
+      top:document.body.scrollHeight,
+
+      behavior:'smooth'
+
+    });
+
+
+    try{
+
+      const response =
+        await fetch(
+          '/api/search',
+          {
+            method:'POST',
+
+            headers:{
+              'Content-Type':
+                'application/json'
+            },
+
+            body:JSON.stringify({
+              query:cleanQuery
+            })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if(!response.ok){
+
+        throw new Error(
+          data.error ||
+          'Web search failed.'
+        );
+
+      }
+
+
+      const results =
+        Array.isArray(data.results)
+          ? data.results
+          : [];
+
+
+      const loading =
+        document.getElementById(
+          loadingId
+        );
+
+
+      if(!loading){
+        return;
+      }
+
+
+      if(!results.length){
+
+        loading.innerHTML =
+          `<b>Neutron Web Search</b><br>
+
+           No results were found for
+
+           <b>
+             ${escapeHtml(cleanQuery)}
+           </b>.`;
+
+      }else{
+
+        const resultHtml =
+          results.map(
+            (item,index) => {
+
+              const title =
+                item.title ||
+                'Untitled result';
+
+
+              const url =
+                item.url || '#';
+
+
+              const content =
+                item.content ||
+                'No preview available.';
+
+
+              return `
+
+                <div
+                  style="
+                    margin-top:12px;
+                    padding:12px;
+                    border:1px solid #2c194d;
+                    border-radius:12px;
+                    background:#0e0918;
+                  "
+                >
+
+                  <div
+                    style="
+                      color:#b16dff;
+                      font-size:12px;
+                      margin-bottom:5px;
+                    "
+                  >
+                    Result ${index + 1}
+                  </div>
+
+
+                  <a
+                    href="${escapeHtml(url)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                      color:#e8dcff;
+                      text-decoration:none;
+                      font-weight:650;
+                    "
+                  >
+                    ${escapeHtml(title)}
+                  </a>
+
+
+                  <div
+                    style="
+                      color:#9185a7;
+                      font-size:13px;
+                      line-height:1.45;
+                      margin-top:6px;
+                    "
+                  >
+                    ${escapeHtml(content)}
+                  </div>
+
+
+                  <div
+                    style="
+                      color:#765f96;
+                      font-size:11px;
+                      margin-top:7px;
+                      word-break:break-all;
+                    "
+                  >
+                    ${escapeHtml(url)}
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          ).join('');
+
+
+        loading.innerHTML =
+
+          `<b>Neutron Web Search</b><br>
+
+           Results for:
+
+           <b>
+             ${escapeHtml(cleanQuery)}
+           </b>
+
+           ${resultHtml}`;
+
+      }
+
+
+    }catch(error){
+
+      const loading =
+        document.getElementById(
+          loadingId
+        );
+
+
+      const message =
+        error &&
+        error.message
+          ? error.message
+          : 'Something went wrong.';
+
+
+      if(loading){
+
+        loading.innerHTML =
+
+          `<b>Neutron Web Search</b><br>
+
+           Sorry, the web search failed.
+
+           <br>
+
+           <small>
+             ${escapeHtml(message)}
+           </small>`;
+
+      }
+
+    }
+
+
+    window.scrollTo({
+
+      top:document.body.scrollHeight,
+
+      behavior:'smooth'
+
+    });
+
+  }
+);
+
+
+/* CALCULATOR */
 
 calculatorTool.addEventListener(
   'click',
@@ -2015,19 +1963,11 @@ calculatorTool.addEventListener(
 
 
     if(!expression){
-
       return;
-
     }
 
 
     try{
-
-      /*
-       Simple calculator.
-       Only mathematical characters
-       are accepted.
-      */
 
       if(
         !/^[0-9+\-*/().%\s]+$/
@@ -2067,7 +2007,7 @@ calculatorTool.addEventListener(
 );
 
 
-/* Clear chat */
+/* CLEAR CHAT */
 
 clearChatTool.addEventListener(
   'click',
@@ -2095,7 +2035,7 @@ clearChatTool.addEventListener(
 );
 
 
-/* Focus */
+/* FOCUS */
 
 focusTool.addEventListener(
   'click',
@@ -2111,7 +2051,7 @@ focusTool.addEventListener(
 );
 
 
-/* Close tools when tapping outside */
+/* CLOSE TOOLS */
 
 document.addEventListener(
   'click',
@@ -2132,9 +2072,7 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   MICROPHONE
-===================================================== */
+/* MICROPHONE */
 
 let recognition = null;
 
@@ -2194,12 +2132,12 @@ if(SpeechRecognition){
   recognition.onerror =
     event => {
 
-    console.log(
-      'Microphone error:',
-      event.error
-    );
+      console.log(
+        'Microphone error:',
+        event.error
+      );
 
-  };
+    };
 
 
   recognition.onend = () => {
@@ -2261,9 +2199,7 @@ if(SpeechRecognition){
 }
 
 
-/* =====================================================
-   PWA INSTALL
-===================================================== */
+/* PWA INSTALL */
 
 let deferredPrompt = null;
 
@@ -2309,9 +2245,7 @@ installBtn.addEventListener(
 );
 
 
-/* =====================================================
-   SERVICE WORKER
-===================================================== */
+/* SERVICE WORKER */
 
 if(
   'serviceWorker' in navigator
@@ -2338,9 +2272,7 @@ if(
 }
 
 
-/* =====================================================
-   HTML SAFETY
-===================================================== */
+/* HTML SAFETY */
 
 function escapeHtml(s){
 
@@ -2364,9 +2296,7 @@ function escapeHtml(s){
 }
 
 
-/* =====================================================
-   RESTORE CURRENT CHAT
-===================================================== */
+/* RESTORE CURRENT CHAT */
 
 if(conversation.length){
 
@@ -2404,9 +2334,7 @@ if(conversation.length){
 }
 
 
-/* =====================================================
-   INITIALIZE HISTORY
-===================================================== */
+/* INITIALIZE HISTORY */
 
 renderHistory();
 
